@@ -1,0 +1,185 @@
+[
+  {
+    "id": "crossover",
+    "display_name": "Crossover",
+    "category": "crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.76 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.32, "BEATEN": 0.08, "TRAILING": 0.42, "LOCKED_UP": 0.18 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.30, "BLOWN_BY": 0.05, "HALF_STEP_BEHIND": 0.45, "TRAILING": 0.20 },
+        "from_BEATEN": { "BLOWN_BY": 0.25, "BEATEN": 0.55, "HALF_STEP_BEHIND": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.28, "SET": 0.72 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.18, "OFF_BALANCE": 0.52, "SHIFTING": 0.30 },
+        "from_STUMBLING": { "ON_FLOOR": 0.15, "STUMBLING": 0.45, "OFF_BALANCE": 0.40 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.15, "GUARDING": 0.85 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 },
+        "from_RECOVERING": { "FLAILING": 0.20, "RECOVERING": 0.50, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10,
+      "balance_STUMBLING_boosts_positioning": 0.15,
+      "stance_RECOVERING_boosts_positioning": 0.08,
+      "stance_REACHING_boosts_balance": 0.05
+    },
+    "tags_on_success": ["crossover", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 60 },
+    "effective_grid_regions": ["perimeter", "midrange", "three_point"],
+    "combo_bonus_after": ["hesitation", "jab_step"]
+  },
+  {
+    "id": "hesitation",
+    "display_name": "Hesitation",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.08, "LOCKED_UP": 0.92 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.60, "LOCKED_UP": 0.25 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.15, "OFF_BALANCE": 0.55, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.10, "GUARDING": 0.90 },
+        "from_REACHING": { "RECOVERING": 0.20, "REACHING": 0.50, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.05,
+      "balance_OFF_BALANCE_boosts_positioning": 0.08
+    },
+    "tags_on_success": ["hesitation", "defender_frozen"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.02,
+    "required_attributes": { "ball_handling": 50 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "jab_step",
+    "display_name": "Jab Step",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "LOCKED_UP": 0.95, "TRAILING": 0.05 },
+        "from_TRAILING": { "TRAILING": 0.80, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.10 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.20, "SHIFTING": 0.55, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "GUARDING": 0.92, "REACHING": 0.08 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["jab_step", "weight_tested"],
+    "tags_on_critical": [],
+    "energy_cost": 0.01,
+    "required_attributes": {},
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "behind_the_back",
+    "display_name": "Behind the Back",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.15, "HALF_STEP_BEHIND": 0.05, "LOCKED_UP": 0.80 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.10, "TRAILING": 0.40, "LOCKED_UP": 0.22 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.35, "BLOWN_BY": 0.08, "HALF_STEP_BEHIND": 0.40, "TRAILING": 0.17 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.32, "SHIFTING": 0.43, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.22, "OFF_BALANCE": 0.48, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 },
+        "from_REACHING": { "RECOVERING": 0.38, "REACHING": 0.37, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.12,
+      "balance_STUMBLING_boosts_positioning": 0.18,
+      "stance_RECOVERING_boosts_positioning": 0.10
+    },
+    "tags_on_success": ["behind_the_back", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker", "showboat"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 78 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["crossover", "hesitation"]
+  },
+  {
+    "id": "step_back",
+    "display_name": "Step Back",
+    "category": "separation",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "LOCKED_UP": 0.85, "TRAILING": 0.15 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.20, "TRAILING": 0.55, "LOCKED_UP": 0.25 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.15, "HALF_STEP_BEHIND": 0.50, "TRAILING": 0.35 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.18, "SET": 0.82 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.22, "SHIFTING": 0.50, "SET": 0.28 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.20, "GUARDING": 0.80 },
+        "from_CLOSING_OUT": { "RECOVERING": 0.15, "CLOSING_OUT": 0.55, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["step_back", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 65 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": ["crossover", "behind_the_back", "hesitation"]
+  },
+  {
+    "id": "spin_move",
+    "display_name": "Spin Move",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.72 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.12, "TRAILING": 0.38, "LOCKED_UP": 0.20 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.35, "BLOWN_BY": 0.10, "HALF_STEP_BEHIND": 0.35, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.20, "SET": 0.80 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.20, "OFF_BALANCE": 0.50, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.18, "GUARDING": 0.82 },
+        "from_REACHING": { "RECOVERING": 0.40, "REACHING": 0.35, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10,
+      "stance_REACHING_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["spin_move", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 75 },
+    "effective_grid_regions": ["perimeter", "midrange", "paint"],
+    "combo_bonus_after": ["jab_step", "hesitation"]
+  }
+]
