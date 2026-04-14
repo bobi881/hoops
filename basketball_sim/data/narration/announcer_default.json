@@ -1,0 +1,222 @@
+{
+  "announcer_id": "default_play_by_play",
+  "display_name": "Play-by-Play Announcer",
+  "personality": {
+    "excitement_baseline": 0.5,
+    "signature_phrases": ["BANG", "OH MY", "WHAT A PLAY", "ARE YOU KIDDING ME", "UNBELIEVABLE"],
+    "style": "balanced"
+  },
+  "templates": [
+    {"id": "dribble_crossover_1", "text": "{player} hits the crossover on {defender}.", "required_tags": ["crossover"], "optional_tags": ["direction_switch"], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_crossover_2", "text": "{player} crosses over, looking to create space.", "required_tags": ["crossover"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_crossover_3", "text": "{player} with the killer crossover!", "required_tags": ["crossover"], "optional_tags": ["direction_switch"], "intensity": "elevated", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_hesitation_1", "text": "{player} with the hesi, freezes {defender}.", "required_tags": ["hesitation", "defender_frozen"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_hesitation_2", "text": "{player} hesitates and the defender bites!", "required_tags": ["hesitation"], "optional_tags": ["defender_frozen"], "intensity": "elevated", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_hesitation_3", "text": "{player} gives the hesitation move.", "required_tags": ["hesitation"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_jab_1", "text": "{player} jab steps, testing the waters.", "required_tags": ["jab_step"], "optional_tags": ["weight_tested"], "intensity": "whisper", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_jab_2", "text": "{player} with the jab -- looking for an opening.", "required_tags": ["jab_step"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_btb_1", "text": "{player} goes behind the back!", "required_tags": ["behind_the_back"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_btb_2", "text": "{player} with the behind-the-back dribble, showing off the handles.", "required_tags": ["behind_the_back", "direction_switch"], "optional_tags": ["showboat"], "intensity": "elevated", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_stepback_1", "text": "{player} steps back, creating space.", "required_tags": ["step_back", "space_created"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_stepback_2", "text": "{player} with the step-back.", "required_tags": ["step_back"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_spin_1", "text": "{player} spins past the defender!", "required_tags": ["spin_move"], "optional_tags": ["direction_switch"], "intensity": "elevated", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_spin_2", "text": "{player} with the spin move in traffic.", "required_tags": ["spin_move"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "dribble"},
+    {"id": "dribble_generic_1", "text": "{player} works the handle.", "required_tags": ["dribble_move"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "dribble"},
+    {"id": "dribble_generic_2", "text": "{player} sizing up the defender.", "required_tags": ["dribble_move"], "optional_tags": [], "intensity": "normal", "weight": 0.8, "category": "dribble"},
+    {"id": "dribble_generic_3", "text": "{player} probing the defense.", "required_tags": ["dribble_move"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "dribble"},
+
+    {"id": "ankle_breaker_1", "text": "{player} breaks {defender}'s ankles! Oh no!", "required_tags": ["ankle_breaker"], "optional_tags": ["crossover"], "intensity": "hyped", "weight": 1.2, "category": "highlight"},
+    {"id": "ankle_breaker_2", "text": "{player} with the ANKLE BREAKER! {defender} is on the floor!", "required_tags": ["ankle_breaker"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"},
+    {"id": "ankle_breaker_3", "text": "ANKLE BREAKER! {player} just sent {defender} stumbling!", "required_tags": ["ankle_breaker"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "highlight"},
+    {"id": "ankle_breaker_cross_1", "text": "{player} with the crossover... {defender} is on SKATES!", "required_tags": ["ankle_breaker", "crossover"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"},
+    {"id": "ankle_breaker_hesi_1", "text": "{player} with the hesitation and {defender} goes FLYING!", "required_tags": ["ankle_breaker", "hesitation"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"},
+    {"id": "ankle_breaker_spin_1", "text": "{player} spins and {defender} falls! What a move!", "required_tags": ["ankle_breaker", "spin_move"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"},
+    {"id": "showtime_1", "text": "{player} with the SHOWTIME move! The crowd is loving it!", "required_tags": ["showboat"], "optional_tags": ["ankle_breaker"], "intensity": "hyped", "weight": 1.2, "category": "highlight"},
+
+    {"id": "shot_made_1", "text": "{player} scores!", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "shot_made_2", "text": "{player} knocks it down.", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "shot_made_3", "text": "It's good! {player} with the bucket.", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "shot_made_4", "text": "{player} puts it in.", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "shot"},
+    {"id": "shot_made_5", "text": "And it drops! {player} with the easy bucket.", "required_tags": ["shot_made", "wide_open"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "shot_made_tough_1", "text": "{player} hits the tough shot over the defense!", "required_tags": ["shot_made", "tough_shot"], "optional_tags": ["contested_make"], "intensity": "elevated", "weight": 1.2, "category": "shot"},
+    {"id": "shot_made_tough_2", "text": "What a shot by {player}! Heavily contested and it still goes!", "required_tags": ["shot_made", "contested_make"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "shot"},
+    {"id": "shot_made_tough_3", "text": "{player} forces it up... and it GOES! Incredible!", "required_tags": ["shot_made", "tough_shot"], "optional_tags": [], "intensity": "hyped", "weight": 1.2, "category": "shot"},
+
+    {"id": "three_made_1", "text": "{player} drills the three-pointer!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "three"},
+    {"id": "three_made_2", "text": "{player} from downtown... BANG!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "hyped", "weight": 1.2, "category": "three"},
+    {"id": "three_made_3", "text": "Three ball! {player} splashes it from deep!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "three"},
+    {"id": "three_made_4", "text": "{player} buries the three!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "three"},
+    {"id": "three_made_5", "text": "AND THE THREE! {player} is feeling it!", "required_tags": ["three_pointer_made", "feeling_it"], "optional_tags": ["on_fire"], "intensity": "hyped", "weight": 1.3, "category": "three"},
+    {"id": "three_made_6", "text": "{player} for THREE! Nothing but net!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "three"},
+    {"id": "three_made_open_1", "text": "{player} wide open... knocks down the three.", "required_tags": ["three_pointer_made", "wide_open"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "three"},
+    {"id": "three_made_contested_1", "text": "{player} with the contested three... GOT IT! What a shot!", "required_tags": ["three_pointer_made", "contested_make"], "optional_tags": [], "intensity": "hyped", "weight": 1.4, "category": "three"},
+    {"id": "three_made_heat_1", "text": "HEAT CHECK! {player} launches from deep and... IT GOES!", "required_tags": ["three_pointer_made", "heat_check"], "optional_tags": ["on_fire"], "intensity": "maximum", "weight": 1.5, "category": "three"},
+    {"id": "three_made_corner_1", "text": "{player} from the corner for three... yes!", "required_tags": ["three_pointer_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "three"},
+
+    {"id": "shot_missed_1", "text": "{player} misses the shot.", "required_tags": ["shot_missed"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "shot"},
+    {"id": "shot_missed_2", "text": "No good. {player} can't connect.", "required_tags": ["shot_missed"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "shot"},
+    {"id": "shot_missed_3", "text": "{player} puts it up... off the rim.", "required_tags": ["shot_missed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "shot_missed_4", "text": "Won't go. {player} comes up short.", "required_tags": ["shot_missed"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "shot"},
+    {"id": "shot_missed_5", "text": "{player} fires... and it rims out.", "required_tags": ["shot_missed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "three_missed_1", "text": "{player}'s three-pointer won't go.", "required_tags": ["three_pointer_missed"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "shot"},
+    {"id": "three_missed_2", "text": "{player} from deep... no good.", "required_tags": ["three_pointer_missed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+    {"id": "three_missed_3", "text": "The three-point attempt is off. {player} can't hit from outside.", "required_tags": ["three_pointer_missed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "shot"},
+
+    {"id": "layup_made_1", "text": "{player} drives and finishes at the rim!", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "elevated", "weight": 0.9, "category": "shot"},
+    {"id": "layup_made_2", "text": "{player} takes it all the way to the basket!", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "elevated", "weight": 0.9, "category": "shot"},
+
+    {"id": "pass_complete_1", "text": "{player} finds {target} with a nice pass.", "required_tags": ["pass_completed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "pass"},
+    {"id": "pass_complete_2", "text": "{player} swings it to {target}.", "required_tags": ["pass_completed"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "pass"},
+    {"id": "pass_complete_3", "text": "Ball movement. {player} to {target}.", "required_tags": ["pass_completed"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "pass"},
+    {"id": "pass_complete_4", "text": "{player} hits {target} with the pass.", "required_tags": ["pass_completed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "pass"},
+    {"id": "pass_skip_1", "text": "{player} fires the skip pass to {target}!", "required_tags": ["pass_completed", "skip_pass"], "optional_tags": ["cross_court"], "intensity": "elevated", "weight": 1.1, "category": "pass"},
+    {"id": "pass_cross_1", "text": "{player} with the cross-court pass to {target}!", "required_tags": ["pass_completed", "cross_court"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "pass"},
+    {"id": "pass_chem_1", "text": "{player} and {target} with the connection! Great chemistry.", "required_tags": ["pass_completed", "great_chemistry"], "optional_tags": [], "intensity": "elevated", "weight": 1.2, "category": "pass"},
+
+    {"id": "steal_1", "text": "Stolen! Great hands by the defense!", "required_tags": ["steal"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "steal"},
+    {"id": "steal_2", "text": "Picked off! The defense reads it perfectly!", "required_tags": ["steal"], "optional_tags": ["turnover"], "intensity": "elevated", "weight": 1.0, "category": "steal"},
+    {"id": "steal_3", "text": "STEAL! And the turnover!", "required_tags": ["steal"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "steal"},
+    {"id": "steal_onball_1", "text": "Ripped away! Great on-ball defense!", "required_tags": ["on_ball_steal"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "steal"},
+    {"id": "steal_pass_1", "text": "The pass is intercepted! Great read by the defense!", "required_tags": ["pass_stolen"], "optional_tags": ["turnover"], "intensity": "elevated", "weight": 1.1, "category": "steal"},
+
+    {"id": "turnover_1", "text": "{player} turns it over.", "required_tags": ["turnover"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "turnover"},
+    {"id": "turnover_2", "text": "Turnover! {player} loses the handle.", "required_tags": ["turnover"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "turnover"},
+    {"id": "turnover_3", "text": "{player} coughs it up. Sloppy.", "required_tags": ["turnover"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "turnover"},
+
+    {"id": "block_1", "text": "BLOCKED! Get that out of here!", "required_tags": ["block"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "block"},
+    {"id": "block_2", "text": "Swatted away! Great rim protection!", "required_tags": ["block", "rim_protection"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "block"},
+    {"id": "block_3", "text": "REJECTED! What a block!", "required_tags": ["block"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "block"},
+    {"id": "block_4", "text": "No no no! Not in my house! Blocked!", "required_tags": ["block"], "optional_tags": [], "intensity": "maximum", "weight": 1.4, "category": "block"},
+
+    {"id": "rebound_off_1", "text": "Offensive rebound! Second chance opportunity!", "required_tags": ["offensive_rebound"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "rebound"},
+    {"id": "rebound_off_2", "text": "Grabbed on the offensive glass! More time on the clock.", "required_tags": ["offensive_rebound"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "rebound"},
+    {"id": "rebound_def_1", "text": "Defensive rebound. Ball going the other way.", "required_tags": ["defensive_rebound"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "rebound"},
+    {"id": "rebound_def_2", "text": "Pulled down the rebound. Possession change.", "required_tags": ["defensive_rebound"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "rebound"},
+
+    {"id": "fast_break_1", "text": "Fast break! They're pushing the pace!", "required_tags": ["fast_break"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "transition"},
+    {"id": "fast_break_2", "text": "In transition! Numbers advantage!", "required_tags": ["fast_break"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "transition"},
+    {"id": "pushing_pace_1", "text": "They're running! Coach wants them pushing the ball!", "required_tags": ["pushing_pace"], "optional_tags": ["fast_break"], "intensity": "elevated", "weight": 1.0, "category": "transition"},
+
+    {"id": "quarter_start_1", "text": "And we're underway for the {quarter} quarter.", "required_tags": ["quarter_start"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "game_flow"},
+    {"id": "quarter_end_1", "text": "That's the end of the {quarter} quarter.", "required_tags": ["quarter_end"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "game_flow"},
+    {"id": "game_start_1", "text": "Tip-off! Let's play basketball!", "required_tags": ["game_start"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "game_flow"},
+    {"id": "game_end_1", "text": "That's the final buzzer! What a game!", "required_tags": ["game_end"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "game_flow"},
+    {"id": "timeout_1", "text": "Timeout called. A chance to regroup.", "required_tags": ["timeout"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "game_flow"},
+    {"id": "timeout_run_1", "text": "Timeout! Gotta stop the bleeding!", "required_tags": ["timeout", "stop_opponent_run"], "optional_tags": [], "intensity": "elevated", "weight": 1.2, "category": "game_flow"},
+    {"id": "timeout_late_1", "text": "Late timeout. Strategy time.", "required_tags": ["timeout", "late_game_strategy"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "game_flow"},
+
+    {"id": "clutch_1", "text": "Clutch time! This is where legends are made!", "required_tags": ["clutch_time"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "clutch_make_1", "text": "{player} comes up HUGE in the clutch!", "required_tags": ["shot_made", "clutch_time"], "optional_tags": ["clutch_gene"], "intensity": "hyped", "weight": 1.5, "category": "situational"},
+    {"id": "clutch_make_2", "text": "ICE IN THE VEINS! {player} delivers when it matters most!", "required_tags": ["shot_made", "clutch_gene"], "optional_tags": ["clutch_time"], "intensity": "maximum", "weight": 1.5, "category": "situational"},
+    {"id": "clutch_three_1", "text": "{player} for the three in crunch time... GOT IT!", "required_tags": ["three_pointer_made", "clutch_time"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "situational"},
+    {"id": "clutch_miss_1", "text": "{player} can't connect in the clutch. Big miss.", "required_tags": ["shot_missed", "clutch_time"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "situational"},
+    {"id": "clutch_tight_1", "text": "{player} looks tight out there. The pressure is getting to them.", "required_tags": ["tight"], "optional_tags": ["clutch_time"], "intensity": "normal", "weight": 1.0, "category": "situational"},
+
+    {"id": "on_fire_1", "text": "{player} is ON FIRE! Can't miss right now!", "required_tags": ["on_fire", "shot_made"], "optional_tags": [], "intensity": "hyped", "weight": 1.4, "category": "momentum"},
+    {"id": "on_fire_2", "text": "{player} is absolutely COOKING!", "required_tags": ["on_fire"], "optional_tags": ["shot_made"], "intensity": "hyped", "weight": 1.3, "category": "momentum"},
+    {"id": "feeling_it_1", "text": "{player} is feeling it! The shots are falling!", "required_tags": ["feeling_it", "shot_made"], "optional_tags": [], "intensity": "elevated", "weight": 1.2, "category": "momentum"},
+    {"id": "feeling_it_2", "text": "{player} has that look in their eye. They're locked in.", "required_tags": ["feeling_it"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "momentum"},
+    {"id": "ice_cold_1", "text": "{player} is ice cold tonight. Nothing is falling.", "required_tags": ["ice_cold", "shot_missed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "momentum"},
+    {"id": "ice_cold_2", "text": "Rough night for {player}. The shots just aren't dropping.", "required_tags": ["ice_cold"], "optional_tags": ["shot_missed"], "intensity": "whisper", "weight": 1.0, "category": "momentum"},
+    {"id": "frustrated_1", "text": "{player} is getting frustrated out there. You can see it.", "required_tags": ["frustrated"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "momentum"},
+    {"id": "shook_1", "text": "{player} looks shook. The confidence just isn't there.", "required_tags": ["shook"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "momentum"},
+    {"id": "composed_1", "text": "{player} stays composed under pressure. Veteran move.", "required_tags": ["composed_under_pressure"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "momentum"},
+
+    {"id": "fatigue_gassed_1", "text": "{player} is running on fumes. Needs a rest.", "required_tags": ["gassed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "fatigue"},
+    {"id": "fatigue_gassed_2", "text": "You can see the fatigue on {player}. Heavy legs out there.", "required_tags": ["gassed"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "fatigue"},
+    {"id": "fatigue_winded_1", "text": "{player} catching their breath. Starting to feel the minutes.", "required_tags": ["winded"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "fatigue"},
+    {"id": "def_gassed_1", "text": "The defender is gassed! {player} has a window!", "required_tags": ["defender_gassed"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "fatigue"},
+    {"id": "def_winded_1", "text": "The defender is winded. {player} should attack.", "required_tags": ["defender_winded"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "fatigue"},
+
+    {"id": "help_rotating_1", "text": "Help defense rotating over!", "required_tags": ["help_defense_rotating"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "defense"},
+    {"id": "help_committed_1", "text": "The help is THERE! Great team defense!", "required_tags": ["help_defense_committed"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "defense"},
+    {"id": "defense_locked_1", "text": "The defense is locked in! Nothing easy tonight.", "required_tags": ["locked_in_defense"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "defense"},
+    {"id": "defense_keying_1", "text": "The defense is keying on {player}. They know who the threat is.", "required_tags": ["defense_keying_on_player"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "defense"},
+    {"id": "wall_paint_1", "text": "Nothing in the paint! The defense has a wall down low.", "required_tags": ["wall_in_the_paint"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "defense"},
+    {"id": "closeout_1", "text": "Closing out hard on the shooter!", "required_tags": ["closing_out_hard"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "defense"},
+
+    {"id": "matchup_1", "text": "{player} has the matchup they want. Hunting it.", "required_tags": ["matchup_hunting"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "coaching"},
+    {"id": "lax_def_1", "text": "The defense looks a step slow. Not much energy.", "required_tags": ["lax_defense"], "optional_tags": [], "intensity": "whisper", "weight": 0.9, "category": "coaching"},
+    {"id": "grinding_1", "text": "They're grinding it out. Deliberate, methodical offense.", "required_tags": ["grinding"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "coaching"},
+
+    {"id": "home_1", "text": "The home crowd is into it!", "required_tags": ["home_court"], "optional_tags": ["shot_made"], "intensity": "normal", "weight": 0.7, "category": "situational"},
+    {"id": "garbage_1", "text": "Garbage time. The starters should be resting.", "required_tags": ["garbage_time"], "optional_tags": [], "intensity": "whisper", "weight": 0.8, "category": "situational"},
+    {"id": "desperate_1", "text": "Desperation time. They need to make something happen.", "required_tags": ["desperation"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "shot_clock_1", "text": "Shot clock winding down!", "required_tags": ["shot_clock_winding"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "shot_clock_2", "text": "Running out of time on the shot clock!", "required_tags": ["shot_clock_winding"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "shot_clock_low_1", "text": "Shot clock getting low. Need to find something.", "required_tags": ["shot_clock_low"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "situational"},
+    {"id": "final_min_1", "text": "Under a minute to go! Every possession matters!", "required_tags": ["final_minute"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "crunch_1", "text": "Crunch time. This is what it's all about.", "required_tags": ["crunch_time"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "situational"},
+    {"id": "early_1", "text": "Early going. Both teams finding their rhythm.", "required_tags": ["early_game"], "optional_tags": [], "intensity": "whisper", "weight": 0.6, "category": "situational"},
+
+    {"id": "new_look_1", "text": "{player} with something new! The defender wasn't ready for that.", "required_tags": ["new_look"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "history"},
+    {"id": "reading_it_1", "text": "The defender is reading {player} now. Seen that move before.", "required_tags": ["defender_reading_it"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "history"},
+    {"id": "adjusting_1", "text": "The defender is adjusting. Starting to anticipate.", "required_tags": ["defender_adjusting"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "history"},
+    {"id": "unpredictable_1", "text": "{player} has been unpredictable tonight. Hard to guard.", "required_tags": ["unpredictable"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "history"},
+    {"id": "one_dimensional_1", "text": "{player} keeps going to the same move. The defense knows.", "required_tags": ["one_dimensional"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "history"},
+
+    {"id": "strong_hand_1", "text": "{player} going to the strong hand. In their comfort zone.", "required_tags": ["going_to_strong_hand"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "tendencies"},
+    {"id": "weak_hand_1", "text": "{player} forced to the weak hand. Not ideal.", "required_tags": ["going_to_weak_hand"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "tendencies"},
+    {"id": "comfort_zone_1", "text": "{player} in their sweet spot. This is what they do.", "required_tags": ["in_comfort_zone"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "tendencies"},
+    {"id": "showtime_tendency_1", "text": "{player} going showtime! They love the highlight reel!", "required_tags": ["showtime"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "tendencies"},
+
+    {"id": "team_sync_1", "text": "This team is clicking. Everyone's on the same page.", "required_tags": ["team_in_sync"], "optional_tags": ["pass_completed"], "intensity": "normal", "weight": 1.0, "category": "chemistry"},
+    {"id": "team_disconnect_1", "text": "Some miscommunication there. Not on the same wavelength.", "required_tags": ["team_disconnected"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "chemistry"},
+    {"id": "system_player_1", "text": "{player} knows this system inside and out. High IQ stuff.", "required_tags": ["system_player"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "chemistry"},
+
+    {"id": "hot_streak_1", "text": "{player} can't miss! What a run!", "required_tags": ["hot_streak", "shot_made"], "optional_tags": [], "intensity": "hyped", "weight": 1.3, "category": "streak"},
+    {"id": "hot_streak_2", "text": "Another one! {player} is on a tear!", "required_tags": ["hot_streak"], "optional_tags": ["shot_made"], "intensity": "hyped", "weight": 1.2, "category": "streak"},
+    {"id": "personal_run_1", "text": "{player} is putting the team on their back! Personal scoring run!", "required_tags": ["personal_run"], "optional_tags": [], "intensity": "hyped", "weight": 1.4, "category": "streak"},
+    {"id": "drought_1", "text": "The offense has gone cold. Nothing falling.", "required_tags": ["scoring_drought"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "streak"},
+
+    {"id": "intimidated_1", "text": "{player} looks intimidated. Backing down from the challenge.", "required_tags": ["intimidated"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "psychology"},
+    {"id": "def_frustrated_1", "text": "The defender is getting frustrated. Starting to gamble.", "required_tags": ["defender_frustrated"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "psychology"},
+
+    {"id": "sub_1", "text": "Substitution coming in. Fresh legs.", "required_tags": ["substitution"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "game_flow"},
+
+    {"id": "shotclock_violation_1", "text": "Shot clock violation! They couldn't find anything!", "required_tags": ["shot_clock_violation"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "turnover"},
+
+    {"id": "defender_recovering_1", "text": "The defense scrambling to recover after the pass.", "required_tags": ["defense_recovering"], "optional_tags": [], "intensity": "normal", "weight": 0.8, "category": "defense"},
+
+    {"id": "possession_start_1", "text": "New possession. Ball inbounded.", "required_tags": ["possession_start"], "optional_tags": [], "intensity": "whisper", "weight": 0.3, "category": "game_flow"},
+
+    {"id": "ankle_btb_1", "text": "{player} goes behind the back and {defender} just FALLS! What a move!", "required_tags": ["ankle_breaker", "behind_the_back"], "optional_tags": [], "intensity": "maximum", "weight": 1.6, "category": "highlight"},
+
+    {"id": "shot_made_open_mid_1", "text": "{player} from the elbow. Good look, good shot.", "required_tags": ["shot_made"], "optional_tags": ["wide_open"], "intensity": "normal", "weight": 0.9, "category": "shot"},
+    {"id": "shot_made_paint_1", "text": "{player} finishes inside!", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "normal", "weight": 0.9, "category": "shot"},
+    {"id": "shot_made_strong_1", "text": "{player} powers it in! Strong finish!", "required_tags": ["shot_made"], "optional_tags": [], "intensity": "elevated", "weight": 0.9, "category": "shot"},
+
+    {"id": "three_made_streak_1", "text": "{player} AGAIN from three! They just won't miss!", "required_tags": ["three_pointer_made", "hot_streak"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "three"},
+    {"id": "three_made_run_1", "text": "{player} pulls up for three... BANG! Personal run continues!", "required_tags": ["three_pointer_made", "personal_run"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "three"},
+
+    {"id": "drive_1", "text": "{player} drives to the basket!", "required_tags": ["drive"], "optional_tags": [], "intensity": "elevated", "weight": 1.0, "category": "drive"},
+    {"id": "drive_help_1", "text": "{player} attacks the rim and the help comes over!", "required_tags": ["drive", "help_defense_rotating"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "drive"},
+
+    {"id": "pass_stolen_1", "text": "The pass is picked off! Careless turnover!", "required_tags": ["pass_stolen", "turnover"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "steal"},
+    {"id": "pass_stolen_2", "text": "Intercepted! The defense was sitting on that passing lane!", "required_tags": ["pass_stolen"], "optional_tags": [], "intensity": "elevated", "weight": 1.1, "category": "steal"},
+
+    {"id": "shot_forced_1", "text": "{player} forces up a tough shot as the clock winds down.", "required_tags": ["shot_clock_winding"], "optional_tags": ["shot_missed"], "intensity": "elevated", "weight": 1.0, "category": "shot"},
+
+    {"id": "foul_1", "text": "Foul called. {player} sends them to the line.", "required_tags": ["foul"], "optional_tags": [], "intensity": "normal", "weight": 1.0, "category": "foul"},
+    {"id": "ft_made_1", "text": "{player} at the line. Good. Knocks it down.", "required_tags": ["free_throw"], "optional_tags": [], "intensity": "whisper", "weight": 1.0, "category": "free_throw"},
+
+    {"id": "comfortable_lead_1", "text": "Comfortable lead. They can play with some freedom.", "required_tags": ["comfortable_lead"], "optional_tags": [], "intensity": "whisper", "weight": 0.6, "category": "situational"},
+    {"id": "chasing_1", "text": "They need to chip away at this deficit.", "required_tags": ["chasing"], "optional_tags": [], "intensity": "normal", "weight": 0.8, "category": "situational"},
+
+    {"id": "cross_hesi_combo_1", "text": "{player} with the hesi into the crossover! Beautiful combo!", "required_tags": ["crossover", "hesitation"], "optional_tags": [], "intensity": "hyped", "weight": 1.4, "category": "dribble"},
+    {"id": "cross_stepback_combo_1", "text": "{player} crosses over then steps back! Space created!", "required_tags": ["crossover", "step_back"], "optional_tags": ["space_created"], "intensity": "hyped", "weight": 1.3, "category": "dribble"},
+    {"id": "hesi_spin_combo_1", "text": "{player} with the hesitation into a spin! The defender is lost!", "required_tags": ["hesitation", "spin_move"], "optional_tags": [], "intensity": "hyped", "weight": 1.4, "category": "dribble"},
+
+    {"id": "three_stepback_1", "text": "{player} steps back and fires the three... SPLASH!", "required_tags": ["three_pointer_made", "step_back"], "optional_tags": ["space_created"], "intensity": "hyped", "weight": 1.4, "category": "three"},
+    {"id": "three_stepback_2", "text": "The step-back three by {player}... NOTHING BUT NET!", "required_tags": ["three_pointer_made", "step_back"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "three"},
+
+    {"id": "ankle_then_score_1", "text": "{player} breaks the ankles and then BURIES the shot!", "required_tags": ["ankle_breaker", "shot_made"], "optional_tags": [], "intensity": "maximum", "weight": 1.6, "category": "highlight"},
+    {"id": "ankle_then_three_1", "text": "{player} drops the defender and drains the three! WHAT A SEQUENCE!", "required_tags": ["ankle_breaker", "three_pointer_made"], "optional_tags": [], "intensity": "maximum", "weight": 1.7, "category": "highlight"},
+
+    {"id": "def_frustrated_steal_1", "text": "The frustrated defender reaches in... stolen!", "required_tags": ["defender_frustrated", "steal"], "optional_tags": [], "intensity": "elevated", "weight": 1.2, "category": "defense"},
+
+    {"id": "clutch_three_ankle_1", "text": "{player} BREAKS ANKLES AND HITS THE CLUTCH THREE! UNREAL!", "required_tags": ["ankle_breaker", "three_pointer_made", "clutch_time"], "optional_tags": [], "intensity": "maximum", "weight": 2.0, "category": "highlight"},
+    {"id": "clutch_steal_1", "text": "HUGE steal in the clutch! That could be the game!", "required_tags": ["steal", "clutch_time"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"},
+    {"id": "clutch_block_1", "text": "BLOCKED IN THE CLUTCH! What a defensive play!", "required_tags": ["block", "clutch_time"], "optional_tags": [], "intensity": "maximum", "weight": 1.5, "category": "highlight"}
+  ]
+}

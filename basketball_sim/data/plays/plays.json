@@ -1,0 +1,186 @@
+[
+  {
+    "id": "iso",
+    "display_name": "Isolation",
+    "category": "iso",
+    "description": "Clear out for the ball handler to work one-on-one",
+    "positions": {
+      "ball_handler": "D6",
+      "wing_1": "A5",
+      "wing_2": "G5",
+      "post_1": "C2",
+      "post_2": "E2"
+    },
+    "primary_action": "dribble_move",
+    "preferred_positions": ["PG", "SG", "SF"],
+    "ideal_matchup": {
+      "positioning": ["LOCKED_UP", "TRAILING"],
+      "min_ball_handling": 75
+    },
+    "tags": ["isolation", "one_on_one"],
+    "shot_clock_preference": "early"
+  },
+  {
+    "id": "pick_and_roll",
+    "display_name": "Pick and Roll",
+    "category": "pick_and_roll",
+    "description": "Ball handler uses a screen from the big man, reads the defense",
+    "positions": {
+      "ball_handler": "D7",
+      "screener": "D6",
+      "wing_1": "A6",
+      "wing_2": "G6",
+      "corner": "G5"
+    },
+    "primary_action": "screen",
+    "preferred_positions": ["PG", "SG"],
+    "screener_positions": ["PF", "C"],
+    "options": ["drive", "pull_up", "pass_to_roller", "kick_out"],
+    "tags": ["pick_and_roll", "screen_action"],
+    "shot_clock_preference": "mid"
+  },
+  {
+    "id": "pick_and_pop",
+    "display_name": "Pick and Pop",
+    "category": "pick_and_roll",
+    "description": "Screen and pop to the perimeter for a jump shot",
+    "positions": {
+      "ball_handler": "D7",
+      "screener": "D6",
+      "wing_1": "B6",
+      "wing_2": "F6",
+      "corner": "A5"
+    },
+    "primary_action": "screen",
+    "preferred_positions": ["PG", "SG"],
+    "screener_positions": ["PF", "C"],
+    "options": ["drive", "pass_to_popper", "kick_out"],
+    "tags": ["pick_and_pop", "screen_action", "spacing"],
+    "shot_clock_preference": "mid"
+  },
+  {
+    "id": "post_up",
+    "display_name": "Post Up",
+    "category": "post",
+    "description": "Feed the post player for a back-to-basket move",
+    "positions": {
+      "ball_handler": "D7",
+      "post_player": "C3",
+      "wing_1": "A6",
+      "wing_2": "G6",
+      "weak_side": "F5"
+    },
+    "primary_action": "post_move",
+    "preferred_positions": ["PF", "C"],
+    "ideal_matchup": {
+      "min_post_offense": 65,
+      "size_advantage": true
+    },
+    "tags": ["post_up", "inside_game"],
+    "shot_clock_preference": "early"
+  },
+  {
+    "id": "motion_offense",
+    "display_name": "Motion Offense",
+    "category": "motion",
+    "description": "Continuous ball and player movement looking for the best shot",
+    "positions": {
+      "ball_handler": "D7",
+      "wing_1": "B6",
+      "wing_2": "F6",
+      "slot_1": "C5",
+      "slot_2": "E5"
+    },
+    "primary_action": "pass",
+    "preferred_positions": ["PG"],
+    "movement_rules": ["screen_away", "cut_on_pass", "fill_empty_spot"],
+    "tags": ["motion", "ball_movement", "team_offense"],
+    "shot_clock_preference": "mid"
+  },
+  {
+    "id": "fast_break",
+    "display_name": "Fast Break",
+    "category": "transition",
+    "description": "Push the ball quickly after a turnover or long rebound",
+    "positions": {
+      "ball_handler": "D8",
+      "wing_1": "B7",
+      "wing_2": "F7",
+      "trailer_1": "D9",
+      "trailer_2": "C9"
+    },
+    "primary_action": "drive",
+    "preferred_positions": ["PG", "SG"],
+    "conditions": ["is_fast_break"],
+    "tags": ["fast_break", "transition", "push_pace"],
+    "shot_clock_preference": "early"
+  },
+  {
+    "id": "horns",
+    "display_name": "Horns Set",
+    "category": "set_play",
+    "description": "Two bigs at the elbows, ball handler at the top, wings in corners",
+    "positions": {
+      "ball_handler": "D7",
+      "elbow_1": "C4",
+      "elbow_2": "E4",
+      "corner_1": "A5",
+      "corner_2": "G5"
+    },
+    "primary_action": "screen",
+    "options": ["screen_left", "screen_right", "dho_left", "dho_right", "slip_screen"],
+    "tags": ["horns", "set_play", "screen_action"],
+    "shot_clock_preference": "mid"
+  },
+  {
+    "id": "floppy",
+    "display_name": "Floppy Action",
+    "category": "set_play",
+    "description": "Shooter runs off staggered screens for a catch-and-shoot opportunity",
+    "positions": {
+      "ball_handler": "D7",
+      "shooter": "D2",
+      "screen_1": "C4",
+      "screen_2": "E4",
+      "weak_side": "A6"
+    },
+    "primary_action": "screen",
+    "options": ["curl_tight", "fade_out", "reject_screen"],
+    "tags": ["floppy", "off_ball_screen", "catch_and_shoot"],
+    "shot_clock_preference": "mid"
+  },
+  {
+    "id": "give_and_go",
+    "display_name": "Give and Go",
+    "category": "cutting",
+    "description": "Pass and cut to the basket for a return pass",
+    "positions": {
+      "ball_handler": "D6",
+      "receiver": "B6",
+      "wing": "F6",
+      "post_1": "C3",
+      "post_2": "E3"
+    },
+    "primary_action": "pass",
+    "options": ["cut_baseline", "cut_middle", "fade_corner"],
+    "tags": ["give_and_go", "cutting", "ball_movement"],
+    "shot_clock_preference": "early"
+  },
+  {
+    "id": "spain_pnr",
+    "display_name": "Spain Pick and Roll",
+    "category": "pick_and_roll",
+    "description": "Pick and roll with a back screen on the roll man's defender",
+    "positions": {
+      "ball_handler": "D7",
+      "screener": "D6",
+      "back_screener": "E4",
+      "wing_1": "A6",
+      "corner": "G5"
+    },
+    "primary_action": "screen",
+    "options": ["drive", "lob_to_roller", "kick_out", "back_screen_pop"],
+    "tags": ["spain_pnr", "pick_and_roll", "back_screen", "advanced"],
+    "shot_clock_preference": "mid"
+  }
+]
