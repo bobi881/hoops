@@ -1,0 +1,18 @@
+{
+  "id": "ncaa",
+  "display_name": "NCAA Rules",
+  "quarter_length": 1200.0,
+  "num_quarters": 2,
+  "shot_clock": 30.0,
+  "three_point_distance": 22.15,
+  "overtime_length": 300.0,
+  "team_fouls_for_bonus": 7,
+  "team_fouls_for_double_bonus": 10,
+  "personal_foul_limit": 5,
+  "timeouts_per_half": 4,
+  "backcourt_violation_seconds": 10,
+  "defensive_three_seconds": false,
+  "offensive_three_seconds": false,
+  "hack_a_shaq_rules": false,
+  "notes": "NCAA uses two 20-minute halves, 30-second shot clock"
+}

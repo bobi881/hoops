@@ -1,0 +1,16 @@
+{
+  "id": "nba",
+  "display_name": "NBA Rules",
+  "quarter_length": 720.0,
+  "num_quarters": 4,
+  "shot_clock": 24.0,
+  "three_point_distance": 23.75,
+  "overtime_length": 300.0,
+  "team_fouls_for_bonus": 5,
+  "personal_foul_limit": 6,
+  "timeouts_per_half": 7,
+  "backcourt_violation_seconds": 8,
+  "defensive_three_seconds": true,
+  "offensive_three_seconds": false,
+  "hack_a_shaq_rules": true
+}

@@ -1,0 +1,214 @@
+[
+  {
+    "id": "man_to_man",
+    "display_name": "Man-to-Man",
+    "category": "man",
+    "description": "Each defender is assigned to guard a specific offensive player",
+    "assignments": "matchup_based",
+    "help_defense_trigger": "beaten_or_blown_by",
+    "switch_on_screens": false,
+    "double_team_post": false,
+    "intensity": 0.6,
+    "paint_protection": 0.5,
+    "perimeter_pressure": 0.6,
+    "tags": ["man_to_man", "standard"],
+    "adjustments": {
+      "three_point_defense": 0.5,
+      "fast_break_defense": 0.5
+    }
+  },
+  {
+    "id": "man_deny",
+    "display_name": "Denial Man-to-Man",
+    "category": "man",
+    "description": "Aggressive man defense denying passes to assigned player",
+    "assignments": "matchup_based",
+    "help_defense_trigger": "beaten_or_blown_by",
+    "switch_on_screens": false,
+    "double_team_post": false,
+    "intensity": 0.8,
+    "paint_protection": 0.4,
+    "perimeter_pressure": 0.8,
+    "tags": ["man_to_man", "denial", "aggressive"],
+    "adjustments": {
+      "three_point_defense": 0.7,
+      "fast_break_defense": 0.4
+    }
+  },
+  {
+    "id": "switch_everything",
+    "display_name": "Switch Everything",
+    "category": "man",
+    "description": "Defenders switch all screens to prevent open looks",
+    "assignments": "matchup_based",
+    "help_defense_trigger": "beaten",
+    "switch_on_screens": true,
+    "double_team_post": false,
+    "intensity": 0.7,
+    "paint_protection": 0.5,
+    "perimeter_pressure": 0.7,
+    "tags": ["man_to_man", "switching"],
+    "adjustments": {
+      "three_point_defense": 0.6,
+      "fast_break_defense": 0.5
+    }
+  },
+  {
+    "id": "zone_2_3",
+    "display_name": "2-3 Zone",
+    "category": "zone",
+    "description": "Two defenders up top, three across the baseline. Protects the paint.",
+    "assignments": "zone_based",
+    "positions": {
+      "top_left": "D7",
+      "top_right": "D7",
+      "left_wing": "B4",
+      "middle": "D3",
+      "right_wing": "F4"
+    },
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": false,
+    "double_team_post": true,
+    "intensity": 0.5,
+    "paint_protection": 0.8,
+    "perimeter_pressure": 0.3,
+    "weaknesses": ["corner_three", "high_post"],
+    "tags": ["zone", "2_3_zone", "paint_protection"],
+    "adjustments": {
+      "three_point_defense": 0.3,
+      "fast_break_defense": 0.4
+    }
+  },
+  {
+    "id": "zone_3_2",
+    "display_name": "3-2 Zone",
+    "category": "zone",
+    "description": "Three defenders up top, two down low. Better perimeter coverage.",
+    "assignments": "zone_based",
+    "positions": {
+      "left_top": "B6",
+      "center_top": "D6",
+      "right_top": "F6",
+      "left_low": "C3",
+      "right_low": "E3"
+    },
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": false,
+    "double_team_post": false,
+    "intensity": 0.5,
+    "paint_protection": 0.5,
+    "perimeter_pressure": 0.6,
+    "weaknesses": ["short_corner", "high_low"],
+    "tags": ["zone", "3_2_zone", "perimeter_coverage"],
+    "adjustments": {
+      "three_point_defense": 0.6,
+      "fast_break_defense": 0.4
+    }
+  },
+  {
+    "id": "zone_1_3_1",
+    "display_name": "1-3-1 Zone",
+    "category": "zone",
+    "description": "One chaser, three across the free throw line, one baseline. Trapping zone.",
+    "assignments": "zone_based",
+    "positions": {
+      "chaser": "D7",
+      "left_wing": "B5",
+      "middle": "D5",
+      "right_wing": "F5",
+      "baseline": "D2"
+    },
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": false,
+    "double_team_post": true,
+    "intensity": 0.7,
+    "paint_protection": 0.6,
+    "perimeter_pressure": 0.5,
+    "weaknesses": ["corner", "skip_pass"],
+    "tags": ["zone", "1_3_1_zone", "trapping"],
+    "adjustments": {
+      "three_point_defense": 0.4,
+      "fast_break_defense": 0.3
+    }
+  },
+  {
+    "id": "full_court_press",
+    "display_name": "Full Court Press",
+    "category": "press",
+    "description": "Pressure the ball handler in the backcourt to force turnovers",
+    "assignments": "matchup_based",
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": true,
+    "double_team_post": false,
+    "intensity": 0.9,
+    "paint_protection": 0.2,
+    "perimeter_pressure": 0.9,
+    "tags": ["press", "full_court", "aggressive", "high_risk"],
+    "adjustments": {
+      "three_point_defense": 0.2,
+      "fast_break_defense": 0.2,
+      "steal_chance_boost": 0.06,
+      "fatigue_cost_multiplier": 1.5
+    }
+  },
+  {
+    "id": "half_court_trap",
+    "display_name": "Half Court Trap",
+    "category": "press",
+    "description": "Trap the ball handler at half court with two defenders",
+    "assignments": "matchup_based",
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": true,
+    "double_team_post": false,
+    "intensity": 0.8,
+    "paint_protection": 0.3,
+    "perimeter_pressure": 0.8,
+    "tags": ["press", "half_court_trap", "aggressive"],
+    "adjustments": {
+      "three_point_defense": 0.3,
+      "fast_break_defense": 0.3,
+      "steal_chance_boost": 0.04,
+      "fatigue_cost_multiplier": 1.3
+    }
+  },
+  {
+    "id": "box_and_one",
+    "display_name": "Box and One",
+    "category": "junk",
+    "description": "Four defenders in a box zone, one chasing the best player man-to-man",
+    "assignments": "hybrid",
+    "target_player": "best_scorer",
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": false,
+    "double_team_post": false,
+    "intensity": 0.7,
+    "paint_protection": 0.6,
+    "perimeter_pressure": 0.5,
+    "tags": ["junk_defense", "box_and_one", "star_stopper"],
+    "adjustments": {
+      "three_point_defense": 0.5,
+      "fast_break_defense": 0.4,
+      "focus_player_penalty": 0.08
+    }
+  },
+  {
+    "id": "triangle_and_two",
+    "display_name": "Triangle and Two",
+    "category": "junk",
+    "description": "Three defenders in a triangle zone, two chasing the top two scorers",
+    "assignments": "hybrid",
+    "target_players": 2,
+    "help_defense_trigger": "always_available",
+    "switch_on_screens": false,
+    "double_team_post": false,
+    "intensity": 0.7,
+    "paint_protection": 0.5,
+    "perimeter_pressure": 0.6,
+    "tags": ["junk_defense", "triangle_and_two"],
+    "adjustments": {
+      "three_point_defense": 0.5,
+      "fast_break_defense": 0.3,
+      "focus_player_penalty": 0.06
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "id": "fiba",
+  "display_name": "FIBA Rules",
+  "quarter_length": 600.0,
+  "num_quarters": 4,
+  "shot_clock": 24.0,
+  "three_point_distance": 22.15,
+  "overtime_length": 300.0,
+  "team_fouls_for_bonus": 5,
+  "personal_foul_limit": 5,
+  "timeouts_per_half": 5,
+  "backcourt_violation_seconds": 8,
+  "defensive_three_seconds": false,
+  "offensive_three_seconds": false,
+  "hack_a_shaq_rules": false,
+  "notes": "FIBA uses 10-minute quarters, shorter 3-point line"
+}

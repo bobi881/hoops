@@ -181,5 +181,1092 @@
     "required_attributes": { "ball_handling": 75 },
     "effective_grid_regions": ["perimeter", "midrange", "paint"],
     "combo_bonus_after": ["jab_step", "hesitation"]
+  },
+  {
+    "id": "shamgod",
+    "display_name": "Shamgod",
+    "category": "elite",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.25, "HALF_STEP_BEHIND": 0.12, "LOCKED_UP": 0.63 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.35, "BEATEN": 0.15, "TRAILING": 0.35, "LOCKED_UP": 0.15 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.40, "BLOWN_BY": 0.12, "HALF_STEP_BEHIND": 0.30, "TRAILING": 0.18 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.40, "STUMBLING": 0.08, "SHIFTING": 0.32, "SET": 0.20 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.30, "ON_FLOOR": 0.08, "OFF_BALANCE": 0.42, "SHIFTING": 0.20 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.22, "GUARDING": 0.78 },
+        "from_REACHING": { "RECOVERING": 0.45, "FLAILING": 0.10, "REACHING": 0.25, "GUARDING": 0.20 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.15,
+      "balance_STUMBLING_boosts_positioning": 0.22,
+      "stance_RECOVERING_boosts_positioning": 0.12
+    },
+    "tags_on_success": ["shamgod", "direction_switch", "showboat"],
+    "tags_on_critical": ["ankle_breaker", "highlight_reel"],
+    "energy_cost": 0.06,
+    "required_attributes": { "ball_handling": 90 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["hesitation", "crossover"]
+  },
+  {
+    "id": "between_the_legs",
+    "display_name": "Between the Legs",
+    "category": "crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.14, "HALF_STEP_BEHIND": 0.04, "LOCKED_UP": 0.82 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.25, "BEATEN": 0.06, "TRAILING": 0.45, "LOCKED_UP": 0.24 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.10, "GUARDING": 0.90 },
+        "from_REACHING": { "RECOVERING": 0.30, "REACHING": 0.42, "GUARDING": 0.28 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.08
+    },
+    "tags_on_success": ["between_the_legs", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 68 },
+    "effective_grid_regions": ["perimeter", "midrange", "three_point"],
+    "combo_bonus_after": ["crossover", "hesitation"]
+  },
+  {
+    "id": "in_and_out",
+    "display_name": "In and Out",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.12, "LOCKED_UP": 0.88 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.18, "TRAILING": 0.55, "LOCKED_UP": 0.27 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.32, "SET": 0.68 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.26, "SHIFTING": 0.49, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.18, "GUARDING": 0.82 },
+        "from_REACHING": { "RECOVERING": 0.25, "REACHING": 0.45, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.06,
+      "stance_REACHING_boosts_balance": 0.04
+    },
+    "tags_on_success": ["in_and_out", "fake_crossover"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 65 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["jab_step"]
+  },
+  {
+    "id": "double_crossover",
+    "display_name": "Double Crossover",
+    "category": "crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.22, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.70 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.35, "BEATEN": 0.12, "TRAILING": 0.35, "LOCKED_UP": 0.18 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.35, "BLOWN_BY": 0.08, "HALF_STEP_BEHIND": 0.37, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.35, "SHIFTING": 0.40, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.25, "OFF_BALANCE": 0.45, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.18, "GUARDING": 0.82 },
+        "from_REACHING": { "RECOVERING": 0.40, "REACHING": 0.35, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.12,
+      "balance_STUMBLING_boosts_positioning": 0.16
+    },
+    "tags_on_success": ["double_crossover", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 80 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["hesitation", "jab_step"]
+  },
+  {
+    "id": "euro_step",
+    "display_name": "Euro Step",
+    "category": "finishing",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.70 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.15, "TRAILING": 0.35, "LOCKED_UP": 0.20 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.40, "BLOWN_BY": 0.10, "HALF_STEP_BEHIND": 0.30, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.25, "SET": 0.75 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "IN_AIR": 0.15, "GUARDING": 0.85 },
+        "from_CLOSING_OUT": { "IN_AIR": 0.30, "RECOVERING": 0.25, "CLOSING_OUT": 0.45 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_IN_AIR_boosts_positioning": 0.15
+    },
+    "tags_on_success": ["euro_step", "crafty_finish"],
+    "tags_on_critical": ["highlight_reel"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 70, "driving_layup": 72 },
+    "effective_grid_regions": ["paint", "midrange"],
+    "combo_bonus_after": ["crossover", "spin_move"]
+  },
+  {
+    "id": "harden_step_back",
+    "display_name": "Harden Step-Back",
+    "category": "separation",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.74 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.10, "TRAILING": 0.40, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.25, "SET": 0.75 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.25, "GUARDING": 0.75 },
+        "from_CLOSING_OUT": { "RECOVERING": 0.20, "IN_AIR": 0.10, "CLOSING_OUT": 0.40, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.08,
+      "stance_CLOSING_OUT_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["step_back", "space_created", "gather_step"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 82 },
+    "effective_grid_regions": ["three_point", "perimeter"],
+    "combo_bonus_after": ["crossover", "between_the_legs"]
+  },
+  {
+    "id": "snatch_back",
+    "display_name": "Snatch Back",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.10, "LOCKED_UP": 0.90 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.20, "TRAILING": 0.55, "LOCKED_UP": 0.25 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.32, "SHIFTING": 0.43, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.15, "GUARDING": 0.85 },
+        "from_CLOSING_OUT": { "RECOVERING": 0.20, "CLOSING_OUT": 0.50, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.05
+    },
+    "tags_on_success": ["snatch_back", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 72 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": ["hesitation", "in_and_out"]
+  },
+  {
+    "id": "wraparound",
+    "display_name": "Wraparound",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.16, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.78 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.10, "TRAILING": 0.38, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.24, "SET": 0.76 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.14, "GUARDING": 0.86 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10
+    },
+    "tags_on_success": ["wraparound", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 76 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["hesitation", "jab_step"]
+  },
+  {
+    "id": "inside_out_crossover",
+    "display_name": "Inside-Out Crossover",
+    "category": "crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.16, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.78 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.08, "TRAILING": 0.42, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.16, "GUARDING": 0.84 },
+        "from_REACHING": { "RECOVERING": 0.32, "REACHING": 0.40, "GUARDING": 0.28 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_REACHING_boosts_balance": 0.06
+    },
+    "tags_on_success": ["inside_out_crossover", "fake_crossover", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 72 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["in_and_out"]
+  },
+  {
+    "id": "killer_crossover",
+    "display_name": "Killer Crossover",
+    "category": "elite",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.24, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.66 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.35, "BEATEN": 0.15, "TRAILING": 0.32, "LOCKED_UP": 0.18 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.38, "BLOWN_BY": 0.10, "HALF_STEP_BEHIND": 0.32, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.38, "STUMBLING": 0.05, "SHIFTING": 0.32, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.28, "ON_FLOOR": 0.05, "OFF_BALANCE": 0.42, "SHIFTING": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.20, "GUARDING": 0.80 },
+        "from_REACHING": { "RECOVERING": 0.42, "FLAILING": 0.08, "REACHING": 0.30, "GUARDING": 0.20 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.14,
+      "balance_STUMBLING_boosts_positioning": 0.20,
+      "stance_RECOVERING_boosts_positioning": 0.10,
+      "stance_REACHING_boosts_balance": 0.06
+    },
+    "tags_on_success": ["killer_crossover", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker", "highlight_reel"],
+    "energy_cost": 0.06,
+    "required_attributes": { "ball_handling": 88 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["hesitation", "jab_step", "in_and_out"]
+  },
+  {
+    "id": "stutter_step",
+    "display_name": "Stutter Step",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.10, "LOCKED_UP": 0.90 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.58, "LOCKED_UP": 0.27 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.28, "SET": 0.72 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.22, "SHIFTING": 0.53, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.08, "GUARDING": 0.92 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["stutter_step", "hesitation"],
+    "tags_on_critical": [],
+    "energy_cost": 0.02,
+    "required_attributes": { "ball_handling": 55 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "triple_threat_jab",
+    "display_name": "Triple Threat Jab",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.06, "LOCKED_UP": 0.94 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.10, "TRAILING": 0.62, "LOCKED_UP": 0.28 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.25, "SET": 0.75 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.18, "SHIFTING": 0.57, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["triple_threat", "weight_tested"],
+    "tags_on_critical": [],
+    "energy_cost": 0.01,
+    "required_attributes": {},
+    "effective_grid_regions": ["perimeter", "three_point", "midrange", "post"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "pump_fake",
+    "display_name": "Pump Fake",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "LOCKED_UP": 0.88, "TRAILING": 0.12 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.55, "LOCKED_UP": 0.30 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.20, "SET": 0.80 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.15, "SHIFTING": 0.55, "SET": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "IN_AIR": 0.20, "CLOSING_OUT": 0.10, "GUARDING": 0.70 },
+        "from_CLOSING_OUT": { "IN_AIR": 0.35, "CLOSING_OUT": 0.35, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_IN_AIR_boosts_positioning": 0.20,
+      "stance_CLOSING_OUT_boosts_positioning": 0.08
+    },
+    "tags_on_success": ["pump_fake", "shot_fake"],
+    "tags_on_critical": ["defender_airborne"],
+    "energy_cost": 0.01,
+    "required_attributes": {},
+    "effective_grid_regions": ["perimeter", "three_point", "midrange", "post"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "dream_shake",
+    "display_name": "Dream Shake",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.22, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.68 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.32, "BEATEN": 0.12, "TRAILING": 0.38, "LOCKED_UP": 0.18 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.38, "STUMBLING": 0.05, "SHIFTING": 0.32, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.15, "IN_AIR": 0.10, "GUARDING": 0.75 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.12,
+      "stance_IN_AIR_boosts_positioning": 0.18
+    },
+    "tags_on_success": ["dream_shake", "post_move", "crafty"],
+    "tags_on_critical": ["highlight_reel"],
+    "energy_cost": 0.05,
+    "required_attributes": { "post_offense": 80 },
+    "effective_grid_regions": ["post", "paint"],
+    "combo_bonus_after": ["pump_fake"]
+  },
+  {
+    "id": "drop_step",
+    "display_name": "Drop Step",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.74 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.12, "TRAILING": 0.40, "LOCKED_UP": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.10, "GUARDING": 0.90 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["drop_step", "post_move", "seal"],
+    "tags_on_critical": [],
+    "energy_cost": 0.04,
+    "required_attributes": { "post_offense": 65, "strength": 70 },
+    "effective_grid_regions": ["post", "paint"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "up_and_under",
+    "display_name": "Up and Under",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.15, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.77 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.25, "BEATEN": 0.10, "TRAILING": 0.42, "LOCKED_UP": 0.23 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.18, "SET": 0.82 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.22, "SHIFTING": 0.53, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "IN_AIR": 0.22, "GUARDING": 0.78 },
+        "from_IN_AIR": { "RECOVERING": 0.50, "FLAILING": 0.15, "IN_AIR": 0.35 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_IN_AIR_boosts_positioning": 0.18,
+      "stance_RECOVERING_boosts_positioning": 0.10
+    },
+    "tags_on_success": ["up_and_under", "post_move", "crafty"],
+    "tags_on_critical": ["highlight_reel"],
+    "energy_cost": 0.04,
+    "required_attributes": { "post_offense": 70 },
+    "effective_grid_regions": ["post", "paint"],
+    "combo_bonus_after": ["pump_fake", "dream_shake"]
+  },
+  {
+    "id": "hook_shot_setup",
+    "display_name": "Hook Shot Setup",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.12, "LOCKED_UP": 0.88 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.20, "TRAILING": 0.55, "LOCKED_UP": 0.25 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.15, "SET": 0.85 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.18, "SHIFTING": 0.57, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "GUARDING": 0.90, "REACHING": 0.10 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["hook_shot_setup", "post_move"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "post_offense": 60 },
+    "effective_grid_regions": ["post", "paint"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "fadeaway_setup",
+    "display_name": "Fadeaway Setup",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.15, "LOCKED_UP": 0.85 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.22, "TRAILING": 0.50, "LOCKED_UP": 0.28 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.20, "SET": 0.80 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.20, "SHIFTING": 0.55, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "IN_AIR": 0.08, "CLOSING_OUT": 0.12, "GUARDING": 0.80 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_IN_AIR_boosts_positioning": 0.12
+    },
+    "tags_on_success": ["fadeaway_setup", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "mid_range": 70 },
+    "effective_grid_regions": ["post", "midrange"],
+    "combo_bonus_after": ["pump_fake", "triple_threat_jab"]
+  },
+  {
+    "id": "power_dribble",
+    "display_name": "Power Dribble",
+    "category": "power",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.10, "LOCKED_UP": 0.90 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.55, "LOCKED_UP": 0.30 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.15, "SET": 0.85 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.18, "SHIFTING": 0.57, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "GUARDING": 0.92, "REACHING": 0.08 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["power_dribble", "physical"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "strength": 70 },
+    "effective_grid_regions": ["paint", "post", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "speed_burst",
+    "display_name": "Speed Burst",
+    "category": "explosion",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.05, "LOCKED_UP": 0.75 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.10, "TRAILING": 0.40, "LOCKED_UP": 0.20 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.35, "BLOWN_BY": 0.10, "HALF_STEP_BEHIND": 0.35, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.15, "SET": 0.85 },
+        "from_SHIFTING": { "SHIFTING": 0.60, "SET": 0.25, "OFF_BALANCE": 0.15 }
+      },
+      "stance": {
+        "from_GUARDING": { "GUARDING": 0.88, "REACHING": 0.12 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["speed_burst", "quick_first_step"],
+    "tags_on_critical": ["blown_by"],
+    "energy_cost": 0.05,
+    "required_attributes": { "speed": 80 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": ["hesitation", "jab_step", "pump_fake"]
+  },
+  {
+    "id": "size_up",
+    "display_name": "Size Up",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "LOCKED_UP": 0.92, "TRAILING": 0.08 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.18, "SHIFTING": 0.57, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.10, "GUARDING": 0.90 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["size_up", "reading_defense"],
+    "tags_on_critical": [],
+    "energy_cost": 0.01,
+    "required_attributes": { "basketball_iq": 60 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "shoulder_shimmy",
+    "display_name": "Shoulder Shimmy",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.08, "LOCKED_UP": 0.92 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.12, "TRAILING": 0.60, "LOCKED_UP": 0.28 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.05
+    },
+    "tags_on_success": ["shoulder_shimmy", "misdirection"],
+    "tags_on_critical": [],
+    "energy_cost": 0.02,
+    "required_attributes": { "ball_handling": 60 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "through_the_legs_combo",
+    "display_name": "Through the Legs Combo",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.76 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.08, "TRAILING": 0.40, "LOCKED_UP": 0.22 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.32, "BLOWN_BY": 0.06, "HALF_STEP_BEHIND": 0.40, "TRAILING": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.26, "SET": 0.74 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.20, "OFF_BALANCE": 0.50, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.14, "GUARDING": 0.86 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10,
+      "stance_REACHING_boosts_balance": 0.05
+    },
+    "tags_on_success": ["through_the_legs", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 74 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["crossover", "hesitation"]
+  },
+  {
+    "id": "iverson_crossover",
+    "display_name": "Iverson Crossover",
+    "category": "elite",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.25, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.65 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.35, "BEATEN": 0.15, "TRAILING": 0.30, "LOCKED_UP": 0.20 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.40, "BLOWN_BY": 0.12, "HALF_STEP_BEHIND": 0.28, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.40, "STUMBLING": 0.06, "SHIFTING": 0.29, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.30, "ON_FLOOR": 0.06, "OFF_BALANCE": 0.39, "SHIFTING": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.22, "GUARDING": 0.78 },
+        "from_REACHING": { "RECOVERING": 0.45, "FLAILING": 0.08, "REACHING": 0.27, "GUARDING": 0.20 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.15,
+      "balance_STUMBLING_boosts_positioning": 0.22,
+      "stance_RECOVERING_boosts_positioning": 0.12
+    },
+    "tags_on_success": ["iverson_crossover", "direction_switch", "signature_move"],
+    "tags_on_critical": ["ankle_breaker", "highlight_reel"],
+    "energy_cost": 0.06,
+    "required_attributes": { "ball_handling": 92, "speed": 82 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["hesitation", "size_up"]
+  },
+  {
+    "id": "hesitation_crossover",
+    "display_name": "Hesitation Crossover",
+    "category": "combo",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.72 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.32, "BEATEN": 0.10, "TRAILING": 0.38, "LOCKED_UP": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.32, "SET": 0.68 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.33, "SHIFTING": 0.42, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.22, "OFF_BALANCE": 0.48, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.18, "GUARDING": 0.82 },
+        "from_REACHING": { "RECOVERING": 0.38, "REACHING": 0.37, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.12,
+      "stance_REACHING_boosts_balance": 0.06
+    },
+    "tags_on_success": ["hesitation", "crossover", "combo_move"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 76 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["jab_step", "size_up"]
+  },
+  {
+    "id": "spin_back",
+    "display_name": "Spin Back",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.15, "HALF_STEP_BEHIND": 0.05, "LOCKED_UP": 0.80 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.25, "BEATEN": 0.08, "TRAILING": 0.42, "LOCKED_UP": 0.25 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.15, "GUARDING": 0.85 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.08
+    },
+    "tags_on_success": ["spin_back", "direction_switch", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 74, "speed": 70 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["crossover", "speed_burst"]
+  },
+  {
+    "id": "push_crossover",
+    "display_name": "Push Crossover",
+    "category": "crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.15, "HALF_STEP_BEHIND": 0.05, "LOCKED_UP": 0.80 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.08, "TRAILING": 0.42, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.20, "SET": 0.80 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["push_crossover", "direction_switch"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 62, "strength": 65 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "dribble_pull_up",
+    "display_name": "Dribble Pull-Up",
+    "category": "separation",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.12, "LOCKED_UP": 0.88 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.18, "TRAILING": 0.55, "LOCKED_UP": 0.27 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.15, "SET": 0.85 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.15, "SHIFTING": 0.58, "SET": 0.27 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.18, "GUARDING": 0.82 },
+        "from_CLOSING_OUT": { "IN_AIR": 0.12, "CLOSING_OUT": 0.55, "GUARDING": 0.33 }
+      }
+    },
+    "cross_axis_boosts": {
+      "stance_CLOSING_OUT_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["dribble_pull_up", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 65, "mid_range": 68 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": ["crossover", "hesitation", "between_the_legs"]
+  },
+  {
+    "id": "retreat_dribble",
+    "display_name": "Retreat Dribble",
+    "category": "separation",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "LOCKED_UP": 0.90, "TRAILING": 0.10 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.55, "LOCKED_UP": 0.30 }
+      },
+      "balance": {
+        "from_SET": { "SET": 0.90, "SHIFTING": 0.10 },
+        "from_SHIFTING": { "SET": 0.40, "SHIFTING": 0.45, "OFF_BALANCE": 0.15 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.15, "GUARDING": 0.85 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["retreat_dribble", "reset"],
+    "tags_on_critical": [],
+    "energy_cost": 0.02,
+    "required_attributes": { "ball_handling": 55 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "cradle_move",
+    "display_name": "Cradle Move",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.14, "HALF_STEP_BEHIND": 0.04, "LOCKED_UP": 0.82 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.25, "BEATEN": 0.06, "TRAILING": 0.45, "LOCKED_UP": 0.24 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.25, "SET": 0.75 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.28, "SHIFTING": 0.47, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 },
+        "from_REACHING": { "RECOVERING": 0.32, "REACHING": 0.40, "GUARDING": 0.28 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.08
+    },
+    "tags_on_success": ["cradle_move", "showboat"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 80 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["hesitation", "between_the_legs"]
+  },
+  {
+    "id": "windmill_dribble",
+    "display_name": "Windmill Dribble",
+    "category": "elite",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.76 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.08, "TRAILING": 0.42, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.28, "SET": 0.72 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.32, "SHIFTING": 0.43, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.15, "GUARDING": 0.85 },
+        "from_REACHING": { "RECOVERING": 0.35, "REACHING": 0.40, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10
+    },
+    "tags_on_success": ["windmill_dribble", "showboat"],
+    "tags_on_critical": ["highlight_reel"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 85 },
+    "effective_grid_regions": ["perimeter"],
+    "combo_bonus_after": ["crossover", "between_the_legs"]
+  },
+  {
+    "id": "half_spin",
+    "display_name": "Half Spin",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.12, "LOCKED_UP": 0.88 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.20, "TRAILING": 0.55, "LOCKED_UP": 0.25 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.28, "SET": 0.72 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.05
+    },
+    "tags_on_success": ["half_spin", "direction_change"],
+    "tags_on_critical": [],
+    "energy_cost": 0.03,
+    "required_attributes": { "ball_handling": 68 },
+    "effective_grid_regions": ["perimeter", "midrange", "paint"],
+    "combo_bonus_after": ["hesitation"]
+  },
+  {
+    "id": "reverse_spin",
+    "display_name": "Reverse Spin",
+    "category": "advanced_crossover",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.06, "LOCKED_UP": 0.76 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.10, "TRAILING": 0.40, "LOCKED_UP": 0.22 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.32, "BLOWN_BY": 0.08, "HALF_STEP_BEHIND": 0.38, "TRAILING": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.22, "SET": 0.78 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.20, "OFF_BALANCE": 0.50, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.16, "GUARDING": 0.84 },
+        "from_REACHING": { "RECOVERING": 0.38, "REACHING": 0.37, "GUARDING": 0.25 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.10,
+      "stance_REACHING_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["reverse_spin", "direction_switch"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 76 },
+    "effective_grid_regions": ["perimeter", "midrange", "paint"],
+    "combo_bonus_after": ["crossover", "between_the_legs"]
+  },
+  {
+    "id": "post_spin",
+    "display_name": "Post Spin",
+    "category": "post",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.72 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.12, "TRAILING": 0.38, "LOCKED_UP": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.18, "SET": 0.82 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.22, "SHIFTING": 0.53, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["post_spin", "post_move", "direction_switch"],
+    "tags_on_critical": [],
+    "energy_cost": 0.04,
+    "required_attributes": { "post_offense": 68, "strength": 72 },
+    "effective_grid_regions": ["post", "paint"],
+    "combo_bonus_after": ["drop_step"]
+  },
+  {
+    "id": "shimmy_shake",
+    "display_name": "Shimmy Shake",
+    "category": "deception",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.10, "LOCKED_UP": 0.90 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.58, "LOCKED_UP": 0.27 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.35, "SET": 0.65 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.06
+    },
+    "tags_on_success": ["shimmy_shake", "defender_frozen"],
+    "tags_on_critical": [],
+    "energy_cost": 0.02,
+    "required_attributes": { "ball_handling": 65 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": []
+  },
+  {
+    "id": "behind_back_spin",
+    "display_name": "Behind the Back into Spin",
+    "category": "elite",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.22, "HALF_STEP_BEHIND": 0.10, "LOCKED_UP": 0.68 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.32, "BEATEN": 0.14, "TRAILING": 0.34, "LOCKED_UP": 0.20 },
+        "from_HALF_STEP_BEHIND": { "BEATEN": 0.38, "BLOWN_BY": 0.10, "HALF_STEP_BEHIND": 0.32, "TRAILING": 0.20 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.30, "SET": 0.70 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.35, "STUMBLING": 0.05, "SHIFTING": 0.35, "SET": 0.25 },
+        "from_OFF_BALANCE": { "STUMBLING": 0.25, "OFF_BALANCE": 0.45, "SHIFTING": 0.30 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.18, "GUARDING": 0.82 },
+        "from_REACHING": { "RECOVERING": 0.42, "FLAILING": 0.06, "REACHING": 0.30, "GUARDING": 0.22 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_OFF_BALANCE_boosts_positioning": 0.14,
+      "balance_STUMBLING_boosts_positioning": 0.18,
+      "stance_RECOVERING_boosts_positioning": 0.10
+    },
+    "tags_on_success": ["behind_the_back", "spin_move", "combo_move", "showboat"],
+    "tags_on_critical": ["ankle_breaker", "highlight_reel"],
+    "energy_cost": 0.07,
+    "required_attributes": { "ball_handling": 86 },
+    "effective_grid_regions": ["perimeter", "midrange"],
+    "combo_bonus_after": ["hesitation", "crossover"]
+  },
+  {
+    "id": "quick_stop",
+    "display_name": "Quick Stop",
+    "category": "separation",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.08, "LOCKED_UP": 0.92 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.15, "TRAILING": 0.55, "LOCKED_UP": 0.30 }
+      },
+      "balance": {
+        "from_SET": { "SET": 0.90, "SHIFTING": 0.10 },
+        "from_SHIFTING": { "SET": 0.35, "SHIFTING": 0.50, "OFF_BALANCE": 0.15 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.12, "GUARDING": 0.88 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["quick_stop", "space_created"],
+    "tags_on_critical": [],
+    "energy_cost": 0.02,
+    "required_attributes": { "speed": 65 },
+    "effective_grid_regions": ["perimeter", "three_point", "midrange"],
+    "combo_bonus_after": ["speed_burst"]
+  },
+  {
+    "id": "baseline_spin",
+    "display_name": "Baseline Spin",
+    "category": "finishing",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.18, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.74 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.28, "BEATEN": 0.12, "TRAILING": 0.38, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.20, "SET": 0.80 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.25, "SHIFTING": 0.50, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "REACHING": 0.14, "GUARDING": 0.86 }
+      }
+    },
+    "cross_axis_boosts": {},
+    "tags_on_success": ["baseline_spin", "direction_switch"],
+    "tags_on_critical": [],
+    "energy_cost": 0.04,
+    "required_attributes": { "ball_handling": 68, "driving_layup": 70 },
+    "effective_grid_regions": ["paint", "post"],
+    "combo_bonus_after": ["drop_step"]
+  },
+  {
+    "id": "crossover_step_back",
+    "display_name": "Crossover into Step-Back",
+    "category": "combo",
+    "transitions": {
+      "positioning": {
+        "from_LOCKED_UP": { "TRAILING": 0.20, "HALF_STEP_BEHIND": 0.08, "LOCKED_UP": 0.72 },
+        "from_TRAILING": { "HALF_STEP_BEHIND": 0.30, "BEATEN": 0.10, "TRAILING": 0.38, "LOCKED_UP": 0.22 }
+      },
+      "balance": {
+        "from_SET": { "SHIFTING": 0.28, "SET": 0.72 },
+        "from_SHIFTING": { "OFF_BALANCE": 0.30, "SHIFTING": 0.45, "SET": 0.25 }
+      },
+      "stance": {
+        "from_GUARDING": { "CLOSING_OUT": 0.18, "REACHING": 0.10, "GUARDING": 0.72 },
+        "from_CLOSING_OUT": { "RECOVERING": 0.20, "CLOSING_OUT": 0.50, "GUARDING": 0.30 }
+      }
+    },
+    "cross_axis_boosts": {
+      "balance_SHIFTING_boosts_positioning": 0.06,
+      "stance_CLOSING_OUT_boosts_positioning": 0.05
+    },
+    "tags_on_success": ["crossover", "step_back", "combo_move", "space_created"],
+    "tags_on_critical": ["ankle_breaker"],
+    "energy_cost": 0.05,
+    "required_attributes": { "ball_handling": 78 },
+    "effective_grid_regions": ["perimeter", "three_point"],
+    "combo_bonus_after": ["hesitation", "jab_step"]
   }
 ]
