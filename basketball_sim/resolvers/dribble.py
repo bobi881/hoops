@@ -50,19 +50,11 @@ def resolve_dribble(
     """
     rng = context.rng
 
-    # Drain fatigue on the attacker proportional to the move's energy cost.
-    # Small decrements per action accumulate over a long possession.
+    # Stamp the move's energy cost onto the action so fatigue drain happens
+    # at a single site (Engine._apply_action_result). Keeping both sites
+    # would double-count once any caller pre-populates action.data.
     if move.energy_cost > 0.0:
-        atk = context.attacker
-        atk.fatigue.cardiovascular = max(
-            0.0, atk.fatigue.cardiovascular - move.energy_cost * 0.8
-        )
-        atk.fatigue.muscular = max(
-            0.0, atk.fatigue.muscular - move.energy_cost * 0.6
-        )
-        atk.fatigue.mental = max(
-            0.0, atk.fatigue.mental - move.energy_cost * 0.3
-        )
+        context.action.data.setdefault("energy_cost", move.energy_cost)
 
     # Cross-axis boosts from the move's JSON data
     cross = get_cross_axis_boost(

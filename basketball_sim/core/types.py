@@ -440,6 +440,9 @@ class RulesConfig:
     team_fouls_for_bonus: int = 5
     personal_foul_limit: int = 6
     timeouts_per_half: int = 7
+    # Shot-clock value awarded after an offensive rebound. Real-world
+    # conventions (NBA / FIBA) reset to 14s rather than the full 24s.
+    offensive_rebound_shot_clock: float = 14.0
 
 
 # ---------------------------------------------------------------------------
