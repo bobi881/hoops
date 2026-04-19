@@ -155,6 +155,8 @@ class StatsTracker:
     # Maximum number of actions between a completed pass and a made shot
     # for the pass to count as an assist. Matches real-world convention of
     # "receiver must score on the next touch or take at most one dribble".
+    # The counter advances on the receiver's DRIBBLE_MOVE events plus the
+    # shot attempt itself, so a value of 2 allows one dribble + the shot.
     ASSIST_WINDOW_ACTIONS = 2
 
     def __init__(self) -> None:
@@ -283,6 +285,18 @@ class StatsTracker:
         self._last_passer = event.player_id
         self._actions_since_pass = 0
 
+    def _handle_dribble_move(self, event: GameEvent) -> None:
+        # Dribbles by the receiver after a pass narrow the assist window.
+        # Skip pure defensive-adjustment sentinels (no player_id / flagged
+        # in data) so we don't mistakenly count help-defense events.
+        if not self._last_passer or not event.player_id:
+            return
+        if "defensive_adjustment" in event.data:
+            return
+        if event.player_id == self._last_passer:
+            return
+        self._actions_since_pass += 1
+
     def _handle_assist(self, event: GameEvent) -> None:
         stats = self._get_player_stats(event.player_id)
         if stats is None:
@@ -301,6 +315,7 @@ class StatsTracker:
         EventType.FOUL_COMMITTED: _handle_foul,
         EventType.PASS_COMPLETED: _handle_pass_completed,
         EventType.ASSIST: _handle_assist,
+        EventType.DRIBBLE_MOVE: _handle_dribble_move,
     }
 
     def _get_player_stats(self, player_id: str) -> PlayerStats | None:

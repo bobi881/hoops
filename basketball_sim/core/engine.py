@@ -376,6 +376,13 @@ class GameEngine:
                     offensive_rebound = True
                     # reset matchup for the new ball handler
                     possession.ball_handler.matchup = MatchupState()
+                    # Reset shot clock on offensive rebound so the continuation
+                    # doesn't immediately shot-clock-violate. Capped at the
+                    # ruleset's full shot clock for safety.
+                    possession.shot_clock = min(
+                        self.rules.offensive_rebound_shot_clock,
+                        self.rules.shot_clock,
+                    )
                     # reset rhythm implicitly via new MatchupState
                     # possession continues
                 else:
@@ -416,15 +423,39 @@ class GameEngine:
                     forced, possession.ball_handler.matchup, forced_ctx
                 )
                 self.stats.actions_resolved += 1
+                # Stamp forced-shot events with clock / quarter context,
+                # mirroring the main resolution path above.
+                for event in forced_result.events:
+                    event.game_clock = game.game_clock
+                    event.shot_clock = possession.shot_clock
+                    event.quarter = game.quarter
                 events.extend(forced_result.events)
                 self.bus.emit_many(forced_result.events)
-                possession.is_resolved = True
                 if any(e.event_type == EventType.SHOT_MISSED for e in forced_result.events):
                     # Still route through rebound
                     rebound_result = self._resolve_rebound(possession, game)
+                    # Stamp rebound events with clock / quarter context too.
+                    for event in rebound_result.events:
+                        event.game_clock = game.game_clock
+                        event.shot_clock = possession.shot_clock
+                        event.quarter = game.quarter
                     events.extend(rebound_result.events)
                     self.bus.emit_many(rebound_result.events)
-                    offensive_rebound = bool(rebound_result.ball_handler_change)
+                    if rebound_result.ball_handler_change:
+                        # Swap ball handler on offensive rebound so the
+                        # returned state (and any caller that continues the
+                        # possession for the same team) uses the correct
+                        # player instead of falling back to on_court[0].
+                        self._swap_ball_handler(
+                            possession,
+                            rebound_result.ball_handler_change,
+                            new_cell=possession.ball_handler.cell,
+                        )
+                        possession.ball_handler.matchup = MatchupState()
+                        offensive_rebound = True
+                # Mark possession resolved only after the rebound outcome is
+                # known so the swap above can observe the current state.
+                possession.is_resolved = True
 
         self.bus.emit(
             GameEvent(
