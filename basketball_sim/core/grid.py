@@ -22,7 +22,6 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from functools import lru_cache
 
 # Column letters and row numbers
 COLUMNS = "ABCDEFG"
@@ -76,12 +75,18 @@ def _build_cell(cell_id: str) -> CellMetadata:
     # Backcourt: rows 8-9 (indices 7-8)
     is_backcourt = row >= 7
 
-    # Three-point line geometry (approximate)
-    # Corner threes: A5, A6, G5, G6 (far left/right, rows 5-6)
-    is_corner_three = (col in (0, 6)) and (row in (4, 5))
+    # Three-point line geometry (approximate).
+    # Corner threes: A5 / G5 only (far left / right, row label 5).
+    is_corner_three = (col in (0, 6)) and (row == 4)
 
-    # Arc threes: row 6 (index 5) for columns B-F, plus row 7 for outer columns
-    is_arc_three = (row == 5 and 1 <= col <= 5) or (row == 6 and col in (0, 1, 5, 6))
+    # Arc threes: row label 6 inner columns (B6-F6) and all of row label 7
+    # (above the arc), plus the outer columns on row 6 (A6, G6) which are
+    # the long-corner / wing threes.
+    is_arc_three = (
+        (row == 5 and 1 <= col <= 5)
+        or (row == 5 and col in (0, 6))
+        or (row == 6)
+    )
 
     is_three = is_corner_three or is_arc_three
 

@@ -88,6 +88,7 @@ def resolve_rebound(
         data={
             "rebound_type": reb_type,
             "rebounder": rebounder.display_name,
+            "rebounder_id": rebounder.player_id,
         },
         tags=tags,
     )

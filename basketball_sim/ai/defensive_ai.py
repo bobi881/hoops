@@ -55,7 +55,7 @@ class BasicDefensiveAI(DefensiveAI):
     def _react_to_dribble(
         self,
         possession: PossessionState,
-        matchup: HelpDefenseStatus | object,
+        matchup_state,  # kept as positional arg for call-site compatibility
         rng: random.Random,
     ) -> list[GameEvent]:
         """React to a dribble move -- possibly trigger help defense."""
@@ -205,9 +205,13 @@ class BasicDefensiveAI(DefensiveAI):
         return False
 
     def _calculate_steal_chance(
-        self, possession: PossessionState, rng: random.Random
+        self, possession: PossessionState, _rng: random.Random | None = None
     ) -> float:
-        """Calculate the probability of a steal attempt succeeding."""
+        """Calculate the probability of a steal attempt succeeding.
+
+        The ``_rng`` parameter is unused; the caller performs the actual
+        roll. Kept for call-site compatibility.
+        """
         if not possession.defense:
             return 0.0
 

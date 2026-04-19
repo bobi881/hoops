@@ -9,7 +9,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import Any, Protocol
+from typing import Any, ClassVar, Protocol
 
 
 # ---------------------------------------------------------------------------
@@ -216,9 +216,11 @@ class AggregatedModifier:
     shot_pct_boost: float = 0.0
     tags: list[str] = field(default_factory=list)
 
-    # Clamping range for each per-axis boost
-    CLAMP_MIN: float = -0.25
-    CLAMP_MAX: float = 0.25
+    # Clamping range for each per-axis boost. Declared as ClassVar so they
+    # don't become dataclass fields / show up in __init__ or asdict().
+    CLAMP_MIN: ClassVar[float] = -0.25
+    CLAMP_MAX: ClassVar[float] = 0.25
+    SHOT_CLAMP: ClassVar[float] = 0.15
 
     def combine(self, mod: Modifier) -> None:
         """Merge another modifier into this aggregate (additive)."""
@@ -237,8 +239,11 @@ class AggregatedModifier:
         self.stance_boost = max(self.CLAMP_MIN, min(self.CLAMP_MAX, self.stance_boost))
         self.rhythm_boost = max(self.CLAMP_MIN, min(self.CLAMP_MAX, self.rhythm_boost))
         self.help_boost = max(self.CLAMP_MIN, min(self.CLAMP_MAX, self.help_boost))
-        # shot_pct_boost is not clamped the same way -- it's a direct pct addition
-        self.shot_pct_boost = max(-0.15, min(0.15, self.shot_pct_boost))
+        # shot_pct_boost is clamped to a tighter range since it is a direct
+        # percentage addition to the final shot percentage.
+        self.shot_pct_boost = max(
+            -self.SHOT_CLAMP, min(self.SHOT_CLAMP, self.shot_pct_boost)
+        )
 
 
 # ---------------------------------------------------------------------------

@@ -77,8 +77,14 @@ def resolve_shot(
         rhythm_mod = -0.02  # pull-up off the dribble penalty
 
     # --- Catch-and-shoot vs off-dribble ---
+    # `catch_and_shoot_bonus` is added when shooting off a pass.
+    # `off_dribble_penalty` is SUBTRACTED when shooting off the dribble;
+    # the field name expresses a penalty so a positive value hurts the shot.
     catch_and_shoot = shot_data.get("catch_and_shoot", False)
-    cs_mod = shooter.shooting.catch_and_shoot_bonus if catch_and_shoot else shooter.shooting.off_dribble_penalty
+    if catch_and_shoot:
+        cs_mod = shooter.shooting.catch_and_shoot_bonus
+    else:
+        cs_mod = -shooter.shooting.off_dribble_penalty
 
     # --- Combine ---
     final_pct = (
