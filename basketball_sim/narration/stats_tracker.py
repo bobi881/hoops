@@ -56,18 +56,23 @@ class PlayerStats:
         return self.free_throws_made / self.free_throws_attempted
 
     def format_line(self) -> str:
-        """Format a single-line box score entry."""
+        """Format a single-line box score entry.
+
+        Column widths match the header printed by ``TeamStats.format_box_score``.
+        """
         name = self.display_name or self.player_id
+        fg = f"{self.field_goals_made}-{self.field_goals_attempted}"
+        tpt = f"{self.three_pointers_made}-{self.three_pointers_attempted}"
         return (
             f"{name:<20s} "
-            f"{self.points:>3d} PTS  "
-            f"{self.field_goals_made:>2d}-{self.field_goals_attempted:<2d} FG  "
-            f"{self.three_pointers_made:>2d}-{self.three_pointers_attempted:<2d} 3PT  "
-            f"{self.rebounds:>2d} REB  "
-            f"{self.assists:>2d} AST  "
-            f"{self.steals:>2d} STL  "
-            f"{self.blocks:>2d} BLK  "
-            f"{self.turnovers:>2d} TO"
+            f"{self.points:>4d}  "
+            f"{fg:>6s}  "
+            f"{tpt:>6s}  "
+            f"{self.rebounds:>3d}  "
+            f"{self.assists:>3d}  "
+            f"{self.steals:>3d}  "
+            f"{self.blocks:>3d}  "
+            f"{self.turnovers:>3d}"
         )
 
 
@@ -84,12 +89,22 @@ class TeamStats:
     bench_points: int = 0
 
     def format_box_score(self) -> str:
-        """Format a full team box score."""
+        """Format a full team box score with aligned columns."""
         lines = [
             f"\n{'=' * 80}",
             f"  {self.team_name or self.team_id}",
             f"{'=' * 80}",
-            f"{'Player':<20s} {'PTS':>4s}  {'FG':>6s}  {'3PT':>6s}  {'REB':>3s}  {'AST':>3s}  {'STL':>3s}  {'BLK':>3s}  {'TO':>3s}",
+            (
+                f"{'Player':<20s} "
+                f"{'PTS':>4s}  "
+                f"{'FG':>6s}  "
+                f"{'3PT':>6s}  "
+                f"{'REB':>3s}  "
+                f"{'AST':>3s}  "
+                f"{'STL':>3s}  "
+                f"{'BLK':>3s}  "
+                f"{'TO':>3s}"
+            ),
             "-" * 80,
         ]
         for stats in sorted(self.players.values(), key=lambda s: s.points, reverse=True):
@@ -97,16 +112,18 @@ class TeamStats:
 
         lines.append("-" * 80)
         totals = self._totals()
+        fg = f"{totals['fgm']}-{totals['fga']}"
+        tpt = f"{totals['tpm']}-{totals['tpa']}"
         lines.append(
             f"{'TOTAL':<20s} "
-            f"{totals['points']:>3d} PTS  "
-            f"{totals['fgm']:>2d}-{totals['fga']:<2d} FG  "
-            f"{totals['tpm']:>2d}-{totals['tpa']:<2d} 3PT  "
-            f"{totals['reb']:>2d} REB  "
-            f"{totals['ast']:>2d} AST  "
-            f"{totals['stl']:>2d} STL  "
-            f"{totals['blk']:>2d} BLK  "
-            f"{totals['to']:>2d} TO"
+            f"{totals['points']:>4d}  "
+            f"{fg:>6s}  "
+            f"{tpt:>6s}  "
+            f"{totals['reb']:>3d}  "
+            f"{totals['ast']:>3d}  "
+            f"{totals['stl']:>3d}  "
+            f"{totals['blk']:>3d}  "
+            f"{totals['to']:>3d}"
         )
         return "\n".join(lines)
 
@@ -135,11 +152,16 @@ class StatsTracker:
         print(tracker.format_box_scores())
     """
 
+    # Maximum number of actions between a completed pass and a made shot
+    # for the pass to count as an assist. Matches real-world convention of
+    # "receiver must score on the next touch or take at most one dribble".
+    ASSIST_WINDOW_ACTIONS = 2
+
     def __init__(self) -> None:
         self._teams: dict[str, TeamStats] = {}
         self._player_team_map: dict[str, str] = {}
-        self._last_shot_player: str = ""  # for assist tracking
         self._last_passer: str = ""
+        self._actions_since_pass: int = 0
 
     def register_team(self, team_id: str, team_name: str = "") -> None:
         """Register a team for stat tracking."""
@@ -170,7 +192,8 @@ class StatsTracker:
         shot_type = event.data.get("shot_type", "")
         if "three" in shot_type:
             stats.three_pointers_attempted += 1
-        self._last_shot_player = event.player_id
+        # Shot attempt consumes a "touch" relative to the last pass
+        self._actions_since_pass += 1
 
     def _handle_shot_made(self, event: GameEvent) -> None:
         stats = self._get_player_stats(event.player_id)
@@ -189,16 +212,25 @@ class StatsTracker:
         if team_id in self._teams:
             self._teams[team_id].total_points += points
 
-        # Assist tracking: if the last action was a pass to this player
-        if self._last_passer and self._last_passer != event.player_id:
+        # Assist tracking: the receiver must score within ASSIST_WINDOW_ACTIONS
+        # of the pass, and on a different player.
+        if (
+            self._last_passer
+            and self._last_passer != event.player_id
+            and self._actions_since_pass <= self.ASSIST_WINDOW_ACTIONS
+        ):
             passer_stats = self._get_player_stats(self._last_passer)
             if passer_stats:
                 passer_stats.assists += 1
-            self._last_passer = ""
+        # Whether credited or not, the window closes at the next made shot.
+        self._last_passer = ""
+        self._actions_since_pass = 0
 
     def _handle_shot_missed(self, event: GameEvent) -> None:
-        # Shot attempt already counted in SHOT_ATTEMPT
-        pass
+        # Shot attempt already counted in SHOT_ATTEMPT. A miss also closes
+        # the assist window -- no assist on a missed shot.
+        self._last_passer = ""
+        self._actions_since_pass = 0
 
     def _handle_free_throw(self, event: GameEvent) -> None:
         stats = self._get_player_stats(event.player_id)
@@ -208,6 +240,9 @@ class StatsTracker:
         if event.data.get("made", False):
             stats.free_throws_made += 1
             stats.points += 1
+            team_id = self._player_team_map.get(event.player_id, "")
+            if team_id in self._teams:
+                self._teams[team_id].total_points += 1
 
     def _handle_rebound(self, event: GameEvent) -> None:
         stats = self._get_player_stats(event.player_id)
@@ -244,8 +279,9 @@ class StatsTracker:
         stats.fouls += 1
 
     def _handle_pass_completed(self, event: GameEvent) -> None:
-        # Track the passer for potential assist
+        # Track the passer for a potential assist; reset the touch counter.
         self._last_passer = event.player_id
+        self._actions_since_pass = 0
 
     def _handle_assist(self, event: GameEvent) -> None:
         stats = self._get_player_stats(event.player_id)
@@ -289,5 +325,5 @@ class StatsTracker:
         """Clear all stats."""
         self._teams.clear()
         self._player_team_map.clear()
-        self._last_shot_player = ""
         self._last_passer = ""
+        self._actions_since_pass = 0
