@@ -14,6 +14,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
 from basketball_sim.core.event_bus import EventBus
+from basketball_sim.core.grid import COURT
 from basketball_sim.core.pipeline import ModifierPipeline
 from basketball_sim.core.types import (
     Action,
@@ -24,6 +25,8 @@ from basketball_sim.core.types import (
     GameEvent,
     GameState,
     MatchupState,
+    OffBallState,
+    PlayerOnCourt,
     PossessionResult,
     PossessionState,
     RulesConfig,
@@ -317,7 +320,8 @@ class GameEngine:
         poss_start = time.monotonic()
         events: list[GameEvent] = []
         action_count = 0
-        shot_clock = self.rules.shot_clock
+        possession.shot_clock = self.rules.shot_clock
+        offensive_rebound = False
 
         self.bus.emit(
             GameEvent(
@@ -338,73 +342,76 @@ class GameEngine:
             self.bus.emit_many(def_events)
 
             # 3. Build context and resolve the action
-            context = ActionContext(
-                action=action,
-                attacker=possession.ball_handler.player,
-                defender=(
-                    possession.defense[0].player
-                    if possession.defense
-                    else possession.ball_handler.player  # fallback for stub
-                ),
-                matchup=possession.ball_handler.matchup,
-                possession=possession,
-                game_state=game,
-                rng=game.rng,
-                cell=possession.ball_handler.cell,
-            )
-
+            context = self._build_context(action, possession, game)
             result = self.resolver.resolve(action, possession.ball_handler.matchup, context)
             self.stats.actions_resolved += 1
 
             # 4. Apply result to possession state
-            if result.new_matchup is not None:
-                possession.ball_handler.matchup = result.new_matchup
+            self._apply_action_result(action, result, possession)
             possession.actions_this_possession.append(action)
             possession.tags_this_possession.extend(result.tags)
 
             # 5. Emit events
             for event in result.events:
                 event.game_clock = game.game_clock
-                event.shot_clock = shot_clock
+                event.shot_clock = possession.shot_clock
                 event.quarter = game.quarter
             events.extend(result.events)
             self.bus.emit_many(result.events)
 
+            # 5a. If a shot missed, route through the rebound resolver
+            missed_shot = any(
+                e.event_type == EventType.SHOT_MISSED for e in result.events
+            )
+            if missed_shot:
+                rebound_result = self._resolve_rebound(possession, game)
+                events.extend(rebound_result.events)
+                self.bus.emit_many(rebound_result.events)
+                if rebound_result.ball_handler_change:
+                    # Offensive rebound: new ball handler, continue the possession
+                    self._swap_ball_handler(
+                        possession, rebound_result.ball_handler_change,
+                        new_cell=possession.ball_handler.cell,
+                    )
+                    offensive_rebound = True
+                    # reset matchup for the new ball handler
+                    possession.ball_handler.matchup = MatchupState()
+                    # reset rhythm implicitly via new MatchupState
+                    # possession continues
+                else:
+                    possession.is_resolved = True
+
             # 6. Check possession-ending conditions
-            if result.ends_possession:
+            if result.ends_possession and not missed_shot:
                 possession.is_resolved = True
 
             # 7. Advance shot clock
-            shot_clock -= action.time_cost
-            if shot_clock <= 0 and not possession.is_resolved:
+            possession.shot_clock -= action.time_cost
+            if possession.shot_clock <= 0 and not possession.is_resolved:
+                # Shot clock violation counts as a turnover
                 violation = GameEvent(
                     event_type=EventType.SHOT_CLOCK_VIOLATION,
                     player_id=possession.ball_handler.player.player_id,
                     game_clock=game.game_clock,
                     quarter=game.quarter,
                 )
-                events.append(violation)
-                self.bus.emit(violation)
+                turnover = GameEvent(
+                    event_type=EventType.TURNOVER,
+                    player_id=possession.ball_handler.player.player_id,
+                    data={"cause": "shot_clock_violation"},
+                    tags=["turnover", "shot_clock_violation"],
+                    game_clock=game.game_clock,
+                    quarter=game.quarter,
+                )
+                events.extend([violation, turnover])
+                self.bus.emit_many([violation, turnover])
                 possession.is_resolved = True
 
             # 8. Safety valve
             action_count += 1
             if action_count >= MAX_ACTIONS_PER_POSSESSION and not possession.is_resolved:
                 forced = self.offensive_ai.force_shot(possession, game)
-                forced_ctx = ActionContext(
-                    action=forced,
-                    attacker=possession.ball_handler.player,
-                    defender=(
-                        possession.defense[0].player
-                        if possession.defense
-                        else possession.ball_handler.player
-                    ),
-                    matchup=possession.ball_handler.matchup,
-                    possession=possession,
-                    game_state=game,
-                    rng=game.rng,
-                    cell=possession.ball_handler.cell,
-                )
+                forced_ctx = self._build_context(forced, possession, game)
                 forced_result = self.resolver.resolve(
                     forced, possession.ball_handler.matchup, forced_ctx
                 )
@@ -412,8 +419,12 @@ class GameEngine:
                 events.extend(forced_result.events)
                 self.bus.emit_many(forced_result.events)
                 possession.is_resolved = True
-                if forced_result.score_change > 0:
-                    result = forced_result  # use forced shot's result for scoring
+                if any(e.event_type == EventType.SHOT_MISSED for e in forced_result.events):
+                    # Still route through rebound
+                    rebound_result = self._resolve_rebound(possession, game)
+                    events.extend(rebound_result.events)
+                    self.bus.emit_many(rebound_result.events)
+                    offensive_rebound = bool(rebound_result.ball_handler_change)
 
         self.bus.emit(
             GameEvent(
@@ -428,22 +439,130 @@ class GameEngine:
         self.stats.possession_times.append(time.monotonic() - poss_start)
 
         # Calculate time elapsed (sum of action time costs, capped by game clock)
-        time_elapsed = self.rules.shot_clock - max(0, shot_clock)
+        time_elapsed = self.rules.shot_clock - max(0.0, possession.shot_clock)
         time_elapsed = min(time_elapsed, game.game_clock)
 
         # Calculate total score change from events
         total_score = sum(
             e.data.get("points", 0)
             for e in events
-            if e.event_type == EventType.SHOT_MADE
+            if e.event_type in (EventType.SHOT_MADE, EventType.FREE_THROW)
+            and (e.event_type != EventType.FREE_THROW or e.data.get("made", False))
         )
 
         return PossessionResult(
             events=events,
             time_elapsed=time_elapsed,
             score_change=total_score,
-            offensive_rebound=False,  # TODO: rebound logic
+            offensive_rebound=offensive_rebound,
         )
+
+    def _build_context(
+        self, action: Action, possession: PossessionState, game: GameState
+    ) -> ActionContext:
+        """Build an ActionContext for the current ball handler."""
+        return ActionContext(
+            action=action,
+            attacker=possession.ball_handler.player,
+            defender=(
+                possession.defense[0].player
+                if possession.defense
+                else possession.ball_handler.player  # fallback
+            ),
+            matchup=possession.ball_handler.matchup,
+            possession=possession,
+            game_state=game,
+            rng=game.rng,
+            cell=possession.ball_handler.cell,
+        )
+
+    def _apply_action_result(
+        self, action: Action, result: ActionResult, possession: PossessionState
+    ) -> None:
+        """Apply post-resolution state changes: matchup, cell movement,
+        ball handler swap on passes, fatigue drain on dribbles.
+        """
+        if result.new_matchup is not None:
+            possession.ball_handler.matchup = result.new_matchup
+
+        # Ball-handler swap (pass / offensive rebound propagates via caller)
+        if result.ball_handler_change and action.action_type == ActionType.PASS:
+            target_cell = action.data.get("target_cell", possession.ball_handler.cell)
+            self._swap_ball_handler(
+                possession, result.ball_handler_change, new_cell=target_cell
+            )
+
+        # Move the ball handler's cell based on action type
+        if action.action_type == ActionType.DRIVE:
+            # Drive ends near the basket
+            possession.ball_handler.cell = "D2"
+        elif action.action_type == ActionType.DRIBBLE_MOVE:
+            # Modest chance to advance toward the basket when the move worked
+            if result.new_matchup is not None and _positioning_improved(
+                possession.ball_handler.matchup
+            ):
+                possession.ball_handler.cell = _advance_toward_basket(
+                    possession.ball_handler.cell
+                )
+
+        # Drain fatigue from the move's energy_cost if available
+        energy = float(action.data.get("energy_cost", 0.0))
+        if energy > 0.0:
+            _drain_fatigue(possession.ball_handler.player, energy)
+
+    def _swap_ball_handler(
+        self,
+        possession: PossessionState,
+        new_player_id: str,
+        new_cell: str,
+    ) -> None:
+        """Swap the ball handler to a new player, preserving cells for others."""
+        # Find the new ball handler among off-ball players
+        new_off_ball_list: list[OffBallState] = []
+        new_handler: PlayerOnCourt | None = None
+        old_handler = possession.ball_handler
+
+        for ob in possession.off_ball_offense:
+            if ob.player.player_id == new_player_id:
+                new_handler = PlayerOnCourt(
+                    player=ob.player,
+                    cell=new_cell,
+                    matchup=MatchupState(),
+                    is_ball_handler=True,
+                )
+            else:
+                new_off_ball_list.append(ob)
+
+        if new_handler is None:
+            # Target isn't in our off-ball set (shouldn't normally happen)
+            return
+
+        # Demote old handler to off-ball
+        new_off_ball_list.append(
+            OffBallState(
+                player=old_handler.player,
+                cell=old_handler.cell,
+                openness=0.3,
+                catch_readiness=0.5,
+            )
+        )
+        possession.ball_handler = new_handler
+        possession.off_ball_offense = new_off_ball_list
+
+    def _resolve_rebound(
+        self, possession: PossessionState, game: GameState
+    ) -> ActionResult:
+        """Route a missed shot through the rebound resolver."""
+        # Late import to avoid cycles (resolvers import from engine for ABCs).
+        from basketball_sim.resolvers.rebound import resolve_rebound
+
+        result = resolve_rebound(possession, game.rng)
+        # Stamp clocks on rebound events
+        for event in result.events:
+            event.game_clock = game.game_clock
+            event.shot_clock = possession.shot_clock
+            event.quarter = game.quarter
+        return result
 
     def _build_possession(self, game: GameState) -> PossessionState:
         """Create a fresh PossessionState from the current game state.
@@ -470,8 +589,6 @@ class GameEngine:
             off_players = offense.players[:5]
         if not def_players:
             def_players = defense.players[:5]
-
-        from basketball_sim.core.types import PlayerOnCourt, OffBallState
 
         ball_handler = PlayerOnCourt(
             player=off_players[0],
@@ -513,3 +630,74 @@ class GameEngine:
             offensive_team_id=offense.team_id,
             defensive_team_id=defense.team_id,
         )
+
+
+# ---------------------------------------------------------------------------
+# Helpers for ball-handler movement and fatigue drain
+# ---------------------------------------------------------------------------
+
+# Mapping from positioning enum name to "advantage for attacker" rank (higher = more).
+from basketball_sim.core.types import (  # noqa: E402  (late import for helpers)
+    DefenderPositioning,
+    Player,
+)
+
+_POSITIONING_RANK = {
+    DefenderPositioning.LOCKED_UP: 0,
+    DefenderPositioning.TRAILING: 1,
+    DefenderPositioning.HALF_STEP_BEHIND: 2,
+    DefenderPositioning.BEATEN: 3,
+    DefenderPositioning.BLOWN_BY: 4,
+}
+
+
+def _positioning_improved(matchup: MatchupState) -> bool:
+    """Return True when the attacker has at least a partial advantage.
+
+    We treat any non-LOCKED_UP state as "improved" for the purpose of
+    deciding whether to advance the ball handler toward the basket.
+    """
+    return _POSITIONING_RANK.get(matchup.positioning, 0) >= 1
+
+
+def _advance_toward_basket(cell: str) -> str:
+    """Move one cell toward the basket at D1.
+
+    Uses the court grid; clamps at the basket cell. Returns the original
+    cell for invalid inputs.
+    """
+    if not COURT.is_valid(cell):
+        return cell
+    meta = COURT.get(cell)
+    # Target column: D (index 3). Target row: toward index 0 (row 1).
+    target_col = 3
+    dc = 0
+    if meta.col < target_col:
+        dc = 1
+    elif meta.col > target_col:
+        dc = -1
+    dr = -1 if meta.row > 0 else 0
+    new_col = meta.col + dc
+    new_row = meta.row + dr
+    from basketball_sim.core.grid import COLUMNS
+
+    if 0 <= new_col < len(COLUMNS) and 0 <= new_row <= 8:
+        candidate = f"{COLUMNS[new_col]}{new_row + 1}"
+        if COURT.is_valid(candidate):
+            return candidate
+    return cell
+
+
+def _drain_fatigue(player: Player, energy_cost: float) -> None:
+    """Reduce a player's cardiovascular + muscular + mental fatigue.
+
+    `energy_cost` is the per-action cost (e.g. 0.03 for a crossover).
+    We translate it into small decrements across each fatigue axis so
+    that a full possession measurably depletes energy.
+    """
+    cardio = max(0.0, player.fatigue.cardiovascular - energy_cost * 0.8)
+    muscular = max(0.0, player.fatigue.muscular - energy_cost * 0.6)
+    mental = max(0.0, player.fatigue.mental - energy_cost * 0.3)
+    player.fatigue.cardiovascular = cardio
+    player.fatigue.muscular = muscular
+    player.fatigue.mental = mental

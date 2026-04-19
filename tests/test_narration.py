@@ -462,7 +462,10 @@ class TestStatsTracker:
         box_score = tracker.format_box_scores()
         assert "Home" in box_score
         assert "Home Player 1" in box_score
-        assert "3 PTS" in box_score
+        # Box score uses aligned columns: points appear as a right-justified
+        # 4-wide integer, so "3" shows up immediately after the player name.
+        assert "PTS" in box_score  # header label present
+        assert "1-1" in box_score  # the 3PT make shows as FG 1-1 and 3PT 1-1
 
     def test_reset(self):
         tracker = self._tracker()

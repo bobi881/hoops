@@ -41,9 +41,8 @@ def psychology_modifier(context: ActionContext) -> Modifier:
     intimidation_penalty = -atk_mental.intimidation * 0.06
 
     # --- Composure under pressure ---
-    # High composure dampens negative effects
-    composure_factor = 0.5 + atk_mental.composure * 0.5  # 0.5 to 1.0
-    # Composure reduces the impact of frustration and intimidation
+    # High composure dampens negative effects. Composure reduces the impact
+    # of frustration and intimidation directly.
     frustration_penalty *= (1.0 - atk_mental.composure * 0.4)
     intimidation_penalty *= (1.0 - atk_mental.composure * 0.5)
 

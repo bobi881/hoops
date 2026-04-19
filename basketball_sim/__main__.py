@@ -31,13 +31,15 @@ from basketball_sim.ai.offensive_ai import BasicOffensiveAI
 from basketball_sim.ai.defensive_ai import BasicDefensiveAI
 from basketball_sim.data.loader import load_moves
 from basketball_sim.resolvers.composite import CompositeResolver
+from basketball_sim.ai.coach_ai import CoachAI
 from basketball_sim.modifiers.fatigue import fatigue_modifier
 from basketball_sim.modifiers.psychology import psychology_modifier
 from basketball_sim.modifiers.tendencies import tendencies_modifier
 from basketball_sim.modifiers.history import history_modifier, reset_history
 from basketball_sim.modifiers.situational import situational_modifier
-from basketball_sim.modifiers.chemistry import chemistry_modifier
-from basketball_sim.modifiers.coaching import coaching_modifier
+from basketball_sim.modifiers.chemistry import chemistry_modifier, reset_chemistry
+from basketball_sim.modifiers.coaching import coaching_modifier, reset_coaching
+from basketball_sim.modifiers.mental_updater import MentalStateUpdater
 from basketball_sim.narration.aggregator import EventAggregator
 from basketball_sim.narration.enricher import ContextEnricher
 from basketball_sim.narration.templates import TemplateSelector
@@ -249,8 +251,20 @@ def main() -> None:
     pipeline.register(chemistry_modifier, "chemistry")
     pipeline.register(coaching_modifier, "coaching")
 
-    # Reset game-level state
+    # Reset module-level game state so repeated in-process runs don't bleed.
     reset_history()
+    reset_chemistry()
+    reset_coaching()
+
+    # Wire a mental-state updater so confidence / momentum / frustration
+    # respond to game events.
+    mental_updater = MentalStateUpdater(home.players + away.players)
+    bus.subscribe_all(mental_updater.handle_event)
+
+    # Instantiate coach AIs (wired to the event bus after the game state
+    # exists, below).
+    home_coach = CoachAI(team=home)
+    away_coach = CoachAI(team=away)
 
     # Set up AI
     moves = load_moves()
@@ -283,6 +297,29 @@ def main() -> None:
         possession_team_id="home",
         rng=random.Random(args.seed),
     )
+
+    # Now that the game state exists, wire the coach AIs to react to the
+    # scoring events that flow through the bus. Coaches track runs, call
+    # timeouts, and adjust their team's coaching-modifier inputs.
+    def _run_tracker(event: GameEvent) -> None:
+        home_coach.track_scoring_run(event, game)
+        away_coach.track_scoring_run(event, game)
+
+    bus.subscribe(EventType.SHOT_MADE, _run_tracker)
+
+    def _end_of_quarter(event: GameEvent) -> None:
+        # Each coach decides whether to call a timeout, sub players, or
+        # adjust the scheme when a quarter ends.
+        for coach in (home_coach, away_coach):
+            coach.adjust_scheme(game)
+            sub_events = coach.evaluate_substitution(game)
+            for ev in sub_events:
+                bus.emit(ev)
+            timeout_event = coach.evaluate_timeout(game)
+            if timeout_event is not None:
+                bus.emit(timeout_event)
+
+    bus.subscribe(EventType.QUARTER_END, _end_of_quarter)
 
     # Print header
     print()

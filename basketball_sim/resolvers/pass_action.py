@@ -73,11 +73,32 @@ def resolve_pass(
     tags: list[str] = list(agg.tags)
 
     if stolen:
-        # Steal / deflection
+        # Steal / deflection. Attribute the steal to the nearest defender in
+        # the passing lane when available so the stats tracker can credit it.
         tags.extend(["pass_stolen", "turnover"])
+        stealer_id = ""
+        for defender_on_court in context.possession.defense:
+            if defender_on_court.cell in lane_cells:
+                stealer_id = defender_on_court.player.player_id
+                break
+        if not stealer_id and context.possession.defense:
+            stealer_id = context.possession.defense[0].player.player_id
 
+        intercept_event = GameEvent(
+            event_type=EventType.PASS_INTERCEPTED,
+            player_id=stealer_id,
+            data={
+                "passer_id": context.action.player_id,
+                "pass_type": pass_type,
+                "from_cell": from_cell,
+                "to_cell": to_cell,
+                "defenders_in_lane": defenders_in_lane,
+            },
+            tags=["pass_intercepted", "steal", "turnover"],
+        )
         steal_event = GameEvent(
             event_type=EventType.STEAL,
+            player_id=stealer_id,
             data={
                 "pass_type": pass_type,
                 "from_cell": from_cell,
@@ -94,7 +115,7 @@ def resolve_pass(
         )
 
         return ActionResult(
-            events=[steal_event, turnover_event],
+            events=[intercept_event, steal_event, turnover_event],
             tags=tags,
             ends_possession=True,
         )
